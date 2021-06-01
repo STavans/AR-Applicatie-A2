@@ -4,9 +4,9 @@
 
 class HitSphere
 {
-	double x, y, radius;
 
 public:
+	double x, y, radius;
 	HitSphere(double, double, double);
 	static bool hit(HitSphere, HitSphere);
 	static bool hitBase(HitSphere);
