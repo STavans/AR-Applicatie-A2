@@ -38,6 +38,7 @@ int main(void)
 		draw();
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+
 	}
 
 	glfwTerminate();
