@@ -8,9 +8,8 @@ class HitSphere
 
 public:
 	HitSphere(double, double, double);
-	static int hit(HitSphere, HitSphere);
+	static bool hit(HitSphere, HitSphere);
+	static bool hitBase(HitSphere);
 };
-
-int hit(HitSphere, HitSphere);
 
 #endif

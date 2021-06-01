@@ -1,3 +1,4 @@
+/*
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "tigl.h"
@@ -99,3 +100,4 @@ void draw()
 
     tigl::end();
 }
+*/

@@ -9,7 +9,7 @@ HitSphere::HitSphere(double xDouble, double yDouble, double radiusDouble)
 	radius = radiusDouble;
 }
 
-int HitSphere::hit(HitSphere sphere1, HitSphere sphere2)
+bool HitSphere::hit(HitSphere sphere1, HitSphere sphere2)
 {
 	double xDiff = fabs(sphere1.x - sphere2.x);
 	double yDiff = fabs(sphere1.y - sphere2.y);
@@ -18,4 +18,8 @@ int HitSphere::hit(HitSphere sphere1, HitSphere sphere2)
 	double distance = sqrt(xDiff * xDiff + yDiff * yDiff);
 
 	return distance <= maxDistance;
+}
+
+bool HitSphere::hitBase(HitSphere sphere) {
+	return sphere.x <= 0;
 }
