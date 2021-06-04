@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include "tigl.h"
 #include "FpsCam.h"
+#include "Menu.h"
 #include <iostream>
 #include <glm/gtc/matrix_transform.hpp>
 using tigl::Vertex;
