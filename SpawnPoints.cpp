@@ -31,7 +31,7 @@ void RandomSpawnPoints()
     for (int i = 0; i < 10; i++) {
         Coordinate c;
         c.x = rand() % 1000;
-        c.y = 0;
+        c.y = 1000;
 
         cArray[i + 10] = c;
     }
@@ -39,8 +39,8 @@ void RandomSpawnPoints()
     for (int i = 0; i < 10; i++)
     {
         Coordinate c;
-        c.x = rand() % 1000;
-        c.y = 1000;
+        c.x = 1000;
+        c.y = rand() % 1000;
 
         cArray[i + 20] = c;
     }
