@@ -158,11 +158,13 @@
     <ClCompile Include="FpsCam.cpp" />
     <ClCompile Include="HitSphere.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="tigl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FpsCam.h" />
     <ClInclude Include="HitSphere.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="tigl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

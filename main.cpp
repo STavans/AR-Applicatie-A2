@@ -33,6 +33,8 @@ int main(void)
 
     init();
 
+    menuSetup(window);  //give the window object to the Menu.cpp file, in case this is necessary
+
 	while (!glfwWindowShouldClose(window))
 	{
 		update();
@@ -69,6 +71,22 @@ void update()
 
 void draw()
 {
+    //CONCEPT, MAYBE REMOVE{
+    switch (Menu.current) {
+    case START:
+        drawMenuStart();
+        break;
+    case GAME_RUNNING:
+
+        break;
+    case GAME_OVER:
+        drawMenuGameOver();
+        break;
+    default:
+        break;
+    }
+    //}
+
     glClearColor(0.3f, 0.4f, 0.6f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
