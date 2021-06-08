@@ -1,37 +1,25 @@
 #include <iostream>
+#include "Coordinate.h"
 using namespace std;
 
-class Coordinate
-{
-public:
-
-    int x;
-    int y;
-
-    void printCoordinate()
-    {
-        cout << "X_Coordinate: " << x << endl;
-        cout << "Y_Coordinate: " << y << endl;
-    }
-};
-
-void RandomSpawnPoints()
+Coordinate * RandomSpawnPoints(int x, int y)
 {
     Coordinate cArray[30];
+
 
     for (int i = 0; i < 10; i++)
     {
         Coordinate c;
         c.x = 0;
-        c.y = rand() % 1000;
+        c.y = rand() % y;
 
         cArray[i] = c;
     }
 
     for (int i = 0; i < 10; i++) {
         Coordinate c;
-        c.x = rand() % 1000;
-        c.y = 1000;
+        c.x = rand() % x;
+        c.y = y;
 
         cArray[i + 10] = c;
     }
@@ -39,8 +27,8 @@ void RandomSpawnPoints()
     for (int i = 0; i < 10; i++)
     {
         Coordinate c;
-        c.x = 1000;
-        c.y = rand() % 1000;
+        c.x = x;
+        c.y = rand() % y;
 
         cArray[i + 20] = c;
     }
@@ -49,4 +37,6 @@ void RandomSpawnPoints()
     {
         c.printCoordinate();
     }
+
+    return cArray;
 }
