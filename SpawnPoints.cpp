@@ -18,7 +18,13 @@ Coordinate * RandomSpawnPoints(int x, int y)
 
     for (int i = 0; i < 10; i++) {
         Coordinate c;
-        c.x = rand() % x;
+        int checkX = rand() % x;
+        if (checkX < x / 2 && checkX > x / 2) {
+            c.x = checkX;
+        }
+        else {
+            c.x = 200;
+        }
         c.y = y;
 
         cArray[i + 10] = c;
