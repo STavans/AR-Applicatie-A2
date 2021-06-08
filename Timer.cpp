@@ -5,10 +5,17 @@
 #include <math.h>
 
 #define M_PI   3.14159265358979323846264338327950288
+#define maxSpawnTime 30.0
 
 class Timer
 {
 public:
+
+private:
+    std::chrono::time_point<std::chrono::system_clock> m_StartTime;
+    std::chrono::time_point<std::chrono::system_clock> m_EndTime;
+    bool                                               m_bRunning = false;
+
     void start()
     {
         m_StartTime = std::chrono::system_clock::now();
@@ -42,8 +49,23 @@ public:
         return elapsedMilliseconds() / 1000.0;
     }
 
-private:
-    std::chrono::time_point<std::chrono::system_clock> m_StartTime;
-    std::chrono::time_point<std::chrono::system_clock> m_EndTime;
-    bool                                               m_bRunning = false;
+    double timeAlpha;
+
+    void increaseSpawn() {
+        Timer timer;
+
+        if (timer.elapsedSeconds() <= 0.0 || timer.elapsedSeconds() >= 500.0)
+        {
+            timeAlpha = 0.0;
+        }
+        else
+        {
+            if (timer.elapsedSeconds() - timeAlpha == maxSpawnTime)
+            {
+                timeAlpha = timer.elapsedSeconds();
+                //increase spawn amount here
+            }
+        }
+    }
+};
 };
