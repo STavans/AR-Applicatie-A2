@@ -156,6 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FpsCam.cpp" />
+    <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="HitSphere.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SpawnPoints.cpp" />
@@ -164,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="Coordinate.h" />
     <ClInclude Include="FpsCam.h" />
+    <ClInclude Include="GameLogic.h" />
     <ClInclude Include="HitSphere.h" />
     <ClInclude Include="tigl.h" />
   </ItemGroup>

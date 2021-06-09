@@ -10,7 +10,7 @@
 
 class GameLogic
 {
-	Coordinate* cArray;
+	Coordinate* spawnPoints;
 
 };
 
