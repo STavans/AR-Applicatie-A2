@@ -2,6 +2,8 @@
 #include <Windows.h>
 #include "Asteroid.h"
 #include "Vizor.h"
+#include "Coordinate.h"
+#include "SpawnPoints.cpp"
 #include "Timer.h"
 
 //-----------------------Vars-------------------
@@ -11,6 +13,7 @@ int score;
 int state;
 
 //TODO: ARRAYLIST/LIST of Asteroids
+Coordinate* SpawnPoints;
 
 const int StartScreen = 1;
 const int GameScreen = 2;
@@ -80,6 +83,9 @@ void startGame() {
 	state = GameScreen;
 	openGameScreen();
 	//TODO: CODE Start the game
+
+	// make an array of spawnpoints: int are screen parameters, need to change to stand values
+	SpawnPoints = RandomSpawnPoints(1000, 1000);
 }
 
 bool readyToReset() {

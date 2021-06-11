@@ -2,11 +2,12 @@
 #include "Coordinate.h"
 using namespace std;
 
+// Makes an array of 30 spawnpoints
 Coordinate * RandomSpawnPoints(int x, int y)
 {
     Coordinate cArray[30];
 
-
+    // adds 10 spawnpoints on the left of the screen
     for (int i = 0; i < 10; i++)
     {
         Coordinate c;
@@ -16,6 +17,7 @@ Coordinate * RandomSpawnPoints(int x, int y)
         cArray[i] = c;
     }
 
+    // adds 10 spawnpoints on the upper part of the screen
     for (int i = 0; i < 10; i++) {
         Coordinate c;
         int checkX = rand() % x;
@@ -30,6 +32,7 @@ Coordinate * RandomSpawnPoints(int x, int y)
         cArray[i + 10] = c;
     }
 
+    // adds 10 spawnpoints on the right side of the screen
     for (int i = 0; i < 10; i++)
     {
         Coordinate c;
@@ -44,5 +47,6 @@ Coordinate * RandomSpawnPoints(int x, int y)
         c.printCoordinate();
     }
 
+    // returns array of spawnpoints
     return cArray;
 }
