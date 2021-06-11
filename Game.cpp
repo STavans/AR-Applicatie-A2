@@ -74,8 +74,8 @@ void startGame() {
 	openGameScreen();
 	//TODO: CODE Start the game
 
-	// make an array of spawnpoints: x and y are screen parameters.
-	SpawnPoints = RandomSpawnPoints(int x, int y);
+	// make an array of spawnpoints: int are screen parameters, need to change to stand values
+	SpawnPoints = RandomSpawnPoints(1000, 1000);
 }
 
 bool readyToReset() {
