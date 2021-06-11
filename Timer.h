@@ -11,4 +11,4 @@ class Timer
 	void increaseSpawn();
 };
 
-#endif
+#endif#
