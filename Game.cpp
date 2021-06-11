@@ -25,6 +25,9 @@ void Startup() {
 	state = StartScreen;
 	openStartScreen();
 	CVSettup();
+
+	// make an array of spawnpoints: int are screen parameters, need to change to stand values
+	SpawnPoints = RandomSpawnPoints(1000, 1000);
 	mainLoop();
 }
 
@@ -32,8 +35,6 @@ void mainLoop(){
 	while (true)
 	{
 		stateLoopSwitch();
-		//Button check? 
-		//Timer run?
 	}
 }
 
@@ -47,16 +48,8 @@ void stateLoopSwitch() {
 			}
 			break;
 		case GameScreen:
-			timerStart();
-
-			while (elapsedSeconds() < 30.0)
-			{
-				gameCheck();
-				increaseSpawn(true);
-			}
-			timerStop();
-			increaseSpawn(false);
-
+			gameCheck();
+			increaseSpawn(true);
 			break;
 		case EndScreen:
 			if (readyToReset())
@@ -71,7 +64,6 @@ void stateLoopSwitch() {
 }
 
 bool enterButtonPressed() {
-	//TODO: CODE Button waiting
 	if (GetAsyncKeyState(VK_RETURN))
 	{
 		return true;
@@ -82,14 +74,12 @@ bool enterButtonPressed() {
 void startGame() {
 	state = GameScreen;
 	openGameScreen();
-	//TODO: CODE Start the game
+	//TODO: CODE Generate asteroid list with spawnpoint
 
-	// make an array of spawnpoints: int are screen parameters, need to change to stand values
-	SpawnPoints = RandomSpawnPoints(1000, 1000);
+	timerStart();
 }
 
 bool readyToReset() {
-//TODE: TODO: CODE wait for button pressed \/ wait for timer
 	if (GetAsyncKeyState(VK_BACK))
 	{
 		return true;
@@ -98,8 +88,10 @@ bool readyToReset() {
 }
 
 void ResetAll() {
-	//TODO: CODE reset all values of points, asteroids and the game
+	//TODO: CODE reset all values of score, asteroid list.
 	//			if settings used do NOT reset Settings!!!
+
+	score = 0;
 }
 
 void gameCheck() {
@@ -107,7 +99,6 @@ void gameCheck() {
 		checkAsteroids();
 		//TODO: remainder of the game logic -> spawning asteroids and lives if opted into the game
 
-		//TODE: OPT escape button when want to quit?
 	}
 	else {
 		endGame();
@@ -124,14 +115,12 @@ void checkAsteroids() {
 
 			//TODE: TODO: CODE Remove asteroid from array or set it to dead
 			//AsteroidList.remove(roid); (this wont work, but is example)
-			//roid.state = dead;
 		}
 	}
 }
 
 bool isOutTime() {
-	//TODO: CODE check whether time is zero or less. retrieve it from the time system
-	if (true)
+	if (elapsedSeconds() > 300.0)
 	{
 		return true;
 	}
@@ -140,7 +129,8 @@ bool isOutTime() {
 
 void endGame() {
 	state = EndScreen;
-	
+	timerStop();
+	increaseSpawn(false);
 	openGameOverScreen();
 	//TODE: TODO: OPT: Show Score on Screen
 	//showScore(score);
