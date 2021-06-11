@@ -1,3 +1,5 @@
+#include <iostream>
+#include <Windows.h>
 #include "Asteroid.h"
 #include "Vizor.h"
 
@@ -57,7 +59,7 @@ void stateLoopSwitch() {
 
 bool enterButtonPressed() {
 	//TODO: CODE Button waiting
-	if (true)
+	if (GetAsyncKeyState(VK_RETURN))
 	{
 		return true;
 	}
@@ -72,7 +74,7 @@ void startGame() {
 
 bool readyToReset() {
 //TODE: TODO: CODE wait for button pressed \/ wait for timer
-	if (true)
+	if (GetAsyncKeyState(VK_BACK))
 	{
 		return true;
 	}
@@ -85,7 +87,7 @@ void ResetAll() {
 }
 
 void gameCheck() {
-	if (!isOutTime()) {
+	if (!isOutTime() && !GetAsyncKeyState(VK_ESCAPE)) {		//Checks if either the time is up or if escape key is pressed
 		checkAsteroids();
 		//TODO: remainder of the game logic -> spawning asteroids and lives if opted into the game
 
