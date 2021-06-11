@@ -4,70 +4,61 @@
 
 #define maxSpawnTime 30.0
 
-class Timer
+std::chrono::time_point<std::chrono::system_clock> startTime;
+std::chrono::time_point<std::chrono::system_clock> endTime;
+bool                                               running = false;
+
+//Starts the timer
+void timerStart()
 {
-public:
+    startTime = std::chrono::system_clock::now();
+    running = true;
+}
 
-    //Vars
-private:
-    std::chrono::time_point<std::chrono::system_clock> startTime;
-    std::chrono::time_point<std::chrono::system_clock> endTime;
-    bool                                               running = false;
+//Stops the timer
+void timerStop()
+{
+    endTime = std::chrono::system_clock::now();
+    running = false;
+}
 
-    //Starts the timer
-    void start()
+//Returns the time in milliseconds
+double elapsedMilliseconds()
+{
+    std::chrono::time_point<std::chrono::system_clock> endTimeCurrent;
+
+    if (running)
     {
-        startTime = std::chrono::system_clock::now();
-        running = true;
+        endTimeCurrent = std::chrono::system_clock::now();
+    }
+    else
+    {
+       endTimeCurrent = endTime;
     }
 
-    //Stops the timer
-    void stop()
+    return std::chrono::duration_cast<std::chrono::milliseconds>(endTimeCurrent - startTime).count();
+}
+
+//Returns the time in seconds.
+double elapsedSeconds()
+{
+    return elapsedMilliseconds() / 1000.0;
+}
+
+double timeAlpha;
+
+//Increases spawn amount based on elapsed time
+void increaseSpawn(bool isRunning) {
+    if (!isRunning)
     {
-        endTime = std::chrono::system_clock::now();
-        running = false;
+        timeAlpha = 0.0;
     }
-
-    //Returns the time in milliseconds
-    double elapsedMilliseconds()
+    else
     {
-        std::chrono::time_point<std::chrono::system_clock> endTimeCurrent;
-
-        if (running)
+        if (elapsedSeconds() - timeAlpha == maxSpawnTime)
         {
-            endTimeCurrent = std::chrono::system_clock::now();
-        }
-        else
-        {
-            endTimeCurrent = endTime;
-        }
-
-        return std::chrono::duration_cast<std::chrono::milliseconds>(endTimeCurrent - startTime).count();
-    }
-
-    //Returns the time in seconds.
-    double elapsedSeconds()
-    {
-        return elapsedMilliseconds() / 1000.0;
-    }
-
-    double timeAlpha;
-
-    //Increases spawn amount based on elapsed time
-    void increaseSpawn(bool isRunning) {
-        Timer timer;
-
-        if (!isRunning)
-        {
-            timeAlpha = 0.0;
-        }
-        else
-        {
-            if (timer.elapsedSeconds() - timeAlpha == maxSpawnTime)
-            {
-                timeAlpha = timer.elapsedSeconds();
+                timeAlpha = elapsedSeconds();
                 //increase spawn amount here
-            }
         }
     }
-};
+}

@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include "Asteroid.h"
 #include "Vizor.h"
+#include "Timer.h"
 
 //-----------------------Vars-------------------
 Vizor leftVizor, rightVizor;
@@ -43,7 +44,16 @@ void stateLoopSwitch() {
 			}
 			break;
 		case GameScreen:
-			gameCheck();
+			timerStart();
+
+			while (elapsedSeconds() < 30.0)
+			{
+				gameCheck();
+				increaseSpawn(true);
+			}
+			timerStop();
+			increaseSpawn(false);
+
 			break;
 		case EndScreen:
 			if (readyToReset())
