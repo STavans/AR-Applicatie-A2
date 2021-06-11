@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include "tigl.h"
 #include "FpsCam.h"
+#include "Menu.h"
 #include <iostream>
 #include <glm/gtc/matrix_transform.hpp>
 using tigl::Vertex;
@@ -32,6 +33,8 @@ int main(void)
 
     init();
 
+    menuSetup();  //give the window object to the Menu.cpp file, in case this is necessary
+
 	while (!glfwWindowShouldClose(window))
 	{
 		update();
@@ -43,6 +46,7 @@ int main(void)
 
 	glfwTerminate();
 
+    inputHandler();
 
     return 0;
 }
@@ -68,6 +72,8 @@ void update()
 
 void draw()
 {
+    
+
     glClearColor(0.3f, 0.4f, 0.6f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     

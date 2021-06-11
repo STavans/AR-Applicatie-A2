@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef TIGL_H
+#define TIGL_H
 #include <GL/glew.h>
 #include <memory>
 #include <glm/glm.hpp>
@@ -146,3 +148,4 @@ namespace tigl
 
 
 
+#endif

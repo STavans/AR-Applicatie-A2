@@ -1,4 +1,6 @@
 #pragma once
+#ifndef FPSCAM_H
+#define FPSCAM_H
 #include <glm/glm.hpp>
 
 struct GLFWwindow;
@@ -19,3 +21,4 @@ private:
 };
 
 
+#endif
