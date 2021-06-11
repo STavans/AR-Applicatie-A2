@@ -7,12 +7,14 @@
 std::chrono::time_point<std::chrono::system_clock> startTime;
 std::chrono::time_point<std::chrono::system_clock> endTime;
 bool                                               running = false;
+int difficulty;
 
 //Starts the timer
 void timerStart()
 {
     startTime = std::chrono::system_clock::now();
     running = true;
+    difficulty = 0;
 }
 
 //Stops the timer
@@ -23,7 +25,7 @@ void timerStop()
 }
 
 //Returns the time in milliseconds
-double elapsedMilliseconds()
+double getElapsedMilliseconds()
 {
     std::chrono::time_point<std::chrono::system_clock> endTimeCurrent;
 
@@ -40,12 +42,13 @@ double elapsedMilliseconds()
 }
 
 //Returns the time in seconds.
-double elapsedSeconds()
+double getElapsedSeconds()
 {
-    return elapsedMilliseconds() / 1000.0;
+    return getElapsedMilliseconds() / 1000.0;
 }
 
 double timeAlpha;
+
 
 //Increases spawn amount based on elapsed time
 void increaseSpawn(bool isRunning) {
@@ -55,10 +58,15 @@ void increaseSpawn(bool isRunning) {
     }
     else
     {
-        if (elapsedSeconds() - timeAlpha == maxSpawnTime)
+        if (getElapsedSeconds() - timeAlpha == maxSpawnTime)
         {
-                timeAlpha = elapsedSeconds();
-                //increase spawn amount here
+                timeAlpha = getElapsedSeconds();
+                difficulty++;
+                //TODO: increase spawn amount here
         }
     }
+}
+
+int getDifficulty() {
+    return difficulty;
 }

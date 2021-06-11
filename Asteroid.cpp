@@ -1,5 +1,6 @@
 #include "Asteroid.h"
 #include "Vizor.h"
+#include "Coordinate.h"
 
 bool shotCheck(Vizor vizor, Asteroid asteroid) {
     int distSq = (asteroid.x - vizor.x) * (asteroid.x - vizor.x) +
@@ -14,10 +15,11 @@ bool shotCheck(Vizor vizor, Asteroid asteroid) {
 Asteroid::Asteroid() {
 }
 
-Asteroid::Asteroid(int diameter, int x, int y, int z, int rotation, int reward) {
+Asteroid::Asteroid(int diameter, int z, int rotation, int reward, Coordinate spawnPoint) {
 	this->diameter = diameter;
-	this->x = x;
-	this->y = y;
+	this->x = spawnPoint.x;
+	this->y = spawnPoint.y;
+    this->z = z;
     this->reward = reward;
 }
 

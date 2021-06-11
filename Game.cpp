@@ -5,6 +5,9 @@
 #include "Coordinate.h"
 #include "SpawnPoints.cpp"
 #include "Timer.h"
+#include <cmath>
+#include <vector>
+#include <algorithm>
 
 //-----------------------Vars-------------------
 Vizor leftVizor, rightVizor;
@@ -12,7 +15,7 @@ Vizor leftVizor, rightVizor;
 int score;
 int state;
 
-//TODO: ARRAYLIST/LIST of Asteroids
+std::vector<Asteroid*> asteroidList;
 Coordinate* SpawnPoints;
 
 const int StartScreen = 1;
@@ -96,8 +99,9 @@ void ResetAll() {
 
 void gameCheck() {
 	if (!isOutTime() && !GetAsyncKeyState(VK_ESCAPE)) {		//Checks if either the time is up or if escape key is pressed
+		checkSpawnable();
 		checkAsteroids();
-		//TODO: remainder of the game logic -> spawning asteroids and lives if opted into the game
+		//TODO: remainder of the game logic -> lives if opted into the game
 
 	}
 	else {
@@ -106,21 +110,25 @@ void gameCheck() {
 }
 
 void checkAsteroids() {
-	for(Asteroid roid : AsteroidList)
+	for(Asteroid* roid : asteroidList)
 	{
-		//TODO: use the asteroids check function or check this using different technic.
 		if (shotCheck(leftVizor, roid)||shotCheck(rightVizor, roid)) {
 			score += 100;
 			explodeAsteroid(roid);
+			asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
+		}
 
-			//TODE: TODO: CODE Remove asteroid from array or set it to dead
-			//AsteroidList.remove(roid); (this wont work, but is example)
+		if (roid->z <= 5)
+		{
+			score -= 100;
+			explodeAsteroid(roid);
+			asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
 		}
 	}
 }
 
 bool isOutTime() {
-	if (elapsedSeconds() > 300.0)
+	if (getElapsedSeconds() > 300.0)
 	{
 		return true;
 	}
@@ -134,6 +142,23 @@ void endGame() {
 	openGameOverScreen();
 	//TODE: TODO: OPT: Show Score on Screen
 	//showScore(score);
+}
+
+Coordinate generateRandomSpawn() {
+	return SpawnPoints[rand() % 30];
+}
+
+void checkSpawnable() {
+	double t = (10 - getDifficulty()) / 2;
+
+	if (fmod(getElapsedSeconds() , t) == 0) {
+		spawnAsteroid();
+	}
+}
+
+void spawnAsteroid() {
+	Asteroid* roid = new Asteroid(5, 100, 0, 100, generateRandomSpawn());
+	asteroidList.push_back(roid);
 }
 
 //-------------OPENGL/visuals-------------
@@ -151,7 +176,7 @@ void openStartScreen() {
 	//TODO: CODE Switch to start screen
 }
 
-void explodeAsteroid(Asteroid roid) {
+void explodeAsteroid(Asteroid* roid) {
 //TODO: OPENGL CODE EXPLOSION!!!
 }
 

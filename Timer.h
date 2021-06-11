@@ -4,8 +4,9 @@
 
 void timerStart();
 void timerStop();
-double elapsedMilliseconds();
-double elapsedSeconds();
+double getElapsedMilliseconds();
+double getElapsedSeconds();
 void increaseSpawn(bool isRunning);
+int getDifficulty();
 
 #endif#
