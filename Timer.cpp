@@ -1,49 +1,51 @@
 #include <iostream>
 #include <chrono>
 #include <ctime>
-#include <cmath>
-#include <math.h>
 
-#define M_PI   3.14159265358979323846264338327950288
 #define maxSpawnTime 30.0
 
 class Timer
 {
 public:
 
+    //Vars
 private:
-    std::chrono::time_point<std::chrono::system_clock> m_StartTime;
-    std::chrono::time_point<std::chrono::system_clock> m_EndTime;
-    bool                                               m_bRunning = false;
+    std::chrono::time_point<std::chrono::system_clock> startTime;
+    std::chrono::time_point<std::chrono::system_clock> endTime;
+    bool                                               running = false;
 
+    //Starts the timer
     void start()
     {
-        m_StartTime = std::chrono::system_clock::now();
-        m_bRunning = true;
+        startTime = std::chrono::system_clock::now();
+        running = true;
     }
 
+    //Stops the timer
     void stop()
     {
-        m_EndTime = std::chrono::system_clock::now();
-        m_bRunning = false;
+        endTime = std::chrono::system_clock::now();
+        running = false;
     }
 
+    //Returns the time in milliseconds
     double elapsedMilliseconds()
     {
-        std::chrono::time_point<std::chrono::system_clock> endTime;
+        std::chrono::time_point<std::chrono::system_clock> endTimeCurrent;
 
-        if (m_bRunning)
+        if (running)
         {
-            endTime = std::chrono::system_clock::now();
+            endTimeCurrent = std::chrono::system_clock::now();
         }
         else
         {
-            endTime = m_EndTime;
+            endTimeCurrent = endTime;
         }
 
-        return std::chrono::duration_cast<std::chrono::milliseconds>(endTime - m_StartTime).count();
+        return std::chrono::duration_cast<std::chrono::milliseconds>(endTimeCurrent - startTime).count();
     }
 
+    //Returns the time in seconds.
     double elapsedSeconds()
     {
         return elapsedMilliseconds() / 1000.0;
@@ -51,10 +53,11 @@ private:
 
     double timeAlpha;
 
-    void increaseSpawn() {
+    //Increases spawn amount based on elapsed time
+    void increaseSpawn(bool isRunning) {
         Timer timer;
 
-        if (timer.elapsedSeconds() <= 0.0 || timer.elapsedSeconds() >= 500.0)
+        if (!isRunning)
         {
             timeAlpha = 0.0;
         }
