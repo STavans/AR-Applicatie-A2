@@ -4,10 +4,14 @@
 #include "Vizor.h"
 #include "Coordinate.h"
 
-
+/*
+* Checks if a asteroid is shot
+*/
 bool shotCheck(Vizor, Asteroid);
 
-
+/*
+* Asteroid class with all attributes and functions
+*/
 class Asteroid {
 
 public:
