@@ -11,10 +11,10 @@ struct Menu {
     int current;
 }Menu;
 
-void drawMenuStart();		//Draws the start screen
-void drawMenuGameOver();	//Draws the game over screen
-void menuSetup();     //init method
-int inputHandler();         //Handles the inputs and determines what screen the window needs to go to
+//void drawMenuStart();		//Draws the start screen
+//void drawMenuGameOver();	//Draws the game over screen
+//void menuSetup();     //init method
+//int inputHandler();         //Handles the inputs and determines what screen the window needs to go to
 
 void menuSetup() {
     Menu.current = START;  //We set the current menu to start with the assumption that we start the game on the start menu screen
