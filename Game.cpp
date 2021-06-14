@@ -94,6 +94,11 @@ void ResetAll() {
 	//TODO: CODE reset all values of score, asteroid list.
 	//			if settings used do NOT reset Settings!!!
 
+	for (Asteroid* roid : asteroidList)		//Loops through the asteroids to delete them all.
+	{
+		asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
+	}
+
 	score = 0;
 }
 
