@@ -29,25 +29,30 @@ VideoCapture cap(webcamID);
 
 int diameter = 40;
 
-int leftX;
-int leftY;
-int rightX;
-int rightY;
+Coordinate leftVizor;
+Coordinate rightVizor;
 
 void setVizor(bool isLeft, Rect area) {
 	int x = ((area.br().x - area.tl().x) / 2) + area.tl().x;
 	int y = ((area.br().y - area.tl().y) / 2) + area.tl().y;
+	if (isLeft)
+	{
+		leftVizor.x = x;
+		leftVizor.y = y;
+	}else{
+		rightVizor.x = x;
+		rightVizor.y = y;
+	}
+
 	circle(gameWindow, Point(x, y), (diameter * screenScale), detection, thickness);
 }
 
 Coordinate getLeftVizor() {
-
-
+	return leftVizor;
 }
 
 Coordinate getRightVizor() {
-
-
+	return rightVizor;
 }
 
 void CVView() {
