@@ -105,7 +105,7 @@ void ResetAll() {
 }
 
 void gameCheck() {
-	if (!isOutTime() && !GetAsyncKeyState(VK_ESCAPE)) {		//Checks if either the time is up or if escape key is pressed
+	if (!isOutTime() && !GetAsyncKeyState(VK_ESCAPE)) {		//Checks if either the time is up or if escape key is pressed. Add the following for lives implementation: && lives > 0
 		checkSpawnable();
 		checkAsteroids();
 		//TODO: remainder of the game logic -> lives if opted into the game
