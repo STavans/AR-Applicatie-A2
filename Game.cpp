@@ -14,6 +14,7 @@ Vizor leftVizor, rightVizor;
 
 int score;
 int state;
+int lives;
 
 std::vector<Asteroid*> asteroidList;
 Coordinate* SpawnPoints;
@@ -28,6 +29,7 @@ void Startup() {
 	state = StartScreen;
 	openStartScreen();
 	CVSettup();
+	lives = 5;
 
 	// make an array of spawnpoints: int are screen parameters, need to change to stand values
 	SpawnPoints = RandomSpawnPoints(1000, 1000);
@@ -91,7 +93,6 @@ bool readyToReset() {
 }
 
 void ResetAll() {
-	//TODO: CODE reset all values of score, asteroid list.
 	//			if settings used do NOT reset Settings!!!
 
 	for (Asteroid* roid : asteroidList)		//Loops through the asteroids to delete them all.
@@ -100,6 +101,7 @@ void ResetAll() {
 	}
 
 	score = 0;
+	lives = 5;
 }
 
 void gameCheck() {
@@ -126,6 +128,7 @@ void checkAsteroids() {
 		if (roid->z <= 5)
 		{
 			score -= 100;
+			lives--;
 			explodeAsteroid(roid);
 			asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
 		}
