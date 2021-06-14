@@ -2,6 +2,9 @@
 #include <iostream>
 using namespace std;
 
+/*
+* Coordinate class used for spawning asteroids on an x and y axis
+*/
 class Coordinate
 {
 public:
