@@ -2,7 +2,9 @@
 #include "Coordinate.h"
 using namespace std;
 
-// Makes an array of 30 spawnpoints
+/*
+* Makes an array of 30 coordinates which are used to randomize spawn
+*/
 Coordinate * RandomSpawnPoints(int x, int y)
 {
     Coordinate cArray[30];
@@ -21,7 +23,7 @@ Coordinate * RandomSpawnPoints(int x, int y)
     for (int i = 0; i < 10; i++) {
         Coordinate c;
         int checkX = rand() % x;
-        if (checkX < x / 2 && checkX > x / 2) {
+        if (checkX < x / 2 - 50 && checkX > x / 2 + 50) {
             c.x = checkX;
         }
         else {
