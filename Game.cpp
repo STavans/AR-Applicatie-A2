@@ -101,6 +101,7 @@ void gameCheck() {
 	if (!isOutTime() && !GetAsyncKeyState(VK_ESCAPE)) {		//Checks if either the time is up or if escape key is pressed
 		checkSpawnable();
 		checkAsteroids();
+		updateAsteroidsLocation();
 		//TODO: remainder of the game logic -> lives if opted into the game
 
 	}
@@ -124,6 +125,38 @@ void checkAsteroids() {
 			explodeAsteroid(roid);
 			asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
 		}
+	}
+}
+
+int width = 1000;
+double speed = 0.005 * width;
+Coordinate* centerPoint = new Coordinate();
+int rotationSpeed = 15;
+int maxDebt = 100;
+int minDebt = 20;
+double debtSpeed = (maxDebt - minDebt) / 10.0;
+
+void updateAsteroidsLocation() {
+	centerPoint->x = 500;
+	centerPoint->y = 0;
+
+	for (Asteroid* roid : asteroidList) {
+		double a = (centerPoint->y - roid->y) / (centerPoint->x - roid->x);
+		double b = -a * roid->x + roid->y;
+
+		if (roid->x < 500)
+		{
+			roid->x += speed;
+		}
+		else if (roid->x > 500) {
+			roid->x -= speed;
+		}
+		
+		double y = a * (roid->x) + b;
+
+		roid->y = y;
+		roid->z -= debtSpeed;
+		roid->rotation += rotationSpeed;
 	}
 }
 

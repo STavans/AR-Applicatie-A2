@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -155,17 +155,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="FpsCam.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="HitSphere.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Source.cpp" />
     <ClCompile Include="SpawnPoints.cpp" />
     <ClCompile Include="tigl.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Vizor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Asteroid.h" />
     <ClInclude Include="Coordinate.h" />
     <ClInclude Include="FpsCam.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="HitSphere.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="tigl.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="Vizor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
