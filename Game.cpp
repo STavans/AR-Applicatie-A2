@@ -5,6 +5,8 @@
 #include "Coordinate.h"
 #include "SpawnPoints.cpp"
 #include "Timer.h"
+#include "Global.h"
+#include "Vision.h"
 #include <cmath>
 #include <vector>
 #include <algorithm>
@@ -27,7 +29,6 @@ const int EndScreen = 3;
 void Startup() {
 	state = StartScreen;
 	openStartScreen();
-	CVSettup();
 
 	// make an array of spawnpoints: int are screen parameters, need to change to stand values
 	SpawnPoints = RandomSpawnPoints(1000, 1000);
@@ -41,6 +42,14 @@ void mainLoop(){
 	}
 }
 
+void gamePlay() {
+	CVView();
+	Coordinate left = getLeftVizor();
+	Coordinate right = getRightVizor();
+	updateLeftVizor(left);
+	updateRightVizor(right);
+}
+
 void stateLoopSwitch() {
 	switch (state)
 	{
@@ -51,6 +60,7 @@ void stateLoopSwitch() {
 			}
 			break;
 		case GameScreen:
+			gamePlay();
 			gameCheck();
 			increaseSpawn(true);
 			break;
@@ -77,7 +87,7 @@ bool enterButtonPressed() {
 void startGame() {
 	state = GameScreen;
 	openGameScreen();
-	//TODO: CODE Generate asteroid list with spawnpoint
+	//TODE: CODE Generate asteroid list with spawnpoint / delete/done?
 
 	timerStart();
 }
@@ -113,43 +123,37 @@ void gameCheck() {
 void checkAsteroids() {
 	for(Asteroid* roid : asteroidList)
 	{
-		if (shotCheck(leftVizor, roid)||shotCheck(rightVizor, roid)) {
-			score += 100;
+		if ((shotCheck(leftVizor, roid)||shotCheck(rightVizor, roid))&&roid->z > minDepth) {
+			score += roid->reward;
 			explodeAsteroid(roid);
 			asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
-		}
-
-		if (roid->z <= 5)
+		}else if(roid->z <= minDepth)
 		{
-			score -= 100;
+			score -= roid->reward;
 			explodeAsteroid(roid);
 			asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
 		}
 	}
 }
 
-int width = 1000;
-double speed = 0.005 * width;
 Coordinate* centerPoint = new Coordinate();
 int rotationSpeed = 15;
-int maxDebt = 100;
-int minDebt = 20;
-double debtSpeed = (maxDebt - minDebt) / 10.0;
+double debtSpeed = (maxDepth - minDepth) / 10.0;
 
 void updateAsteroidsLocation() {
-	centerPoint->x = 500;
+	centerPoint->x = halfScreenWidth;
 	centerPoint->y = 0;
 
 	for (Asteroid* roid : asteroidList) {
 		double a = (centerPoint->y - roid->y) / (centerPoint->x - roid->x);
 		double b = -a * roid->x + roid->y;
 
-		if (roid->x < 500)
+		if (roid->x < halfScreenWidth)
 		{
-			roid->x += speed;
+			roid->x += gameSpeed;
 		}
-		else if (roid->x > 500) {
-			roid->x -= speed;
+		else if (roid->x > halfScreenWidth) {
+			roid->x -= gameSpeed;
 		}
 		
 		double y = a * (roid->x) + b;
@@ -213,10 +217,9 @@ void explodeAsteroid(Asteroid* roid) {
 //TODO: OPENGL CODE EXPLOSION!!!
 }
 
-//-------------OPENCV/controls-------------
-//Move these to open cv later
-
-void CVSettup() {
-	//TODO: CODE settup entire open cv controls
+void updateLeftVizor(Coordinate left) {
+	//TODO: OPENGL CODE update the leftVizor to a new position
 }
-
+void updateRightVizor(Coordinate right) {
+	//TODO: OPENGL CODE updtae the rightVizor to new position
+}

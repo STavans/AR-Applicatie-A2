@@ -3,6 +3,7 @@
 #include <opencv2/core/types.hpp>
 #include "Vizor.h"
 #include "Coordinate.h"
+#include "Asteroid.h"
 
 /*
 * Checks if a asteroid is shot

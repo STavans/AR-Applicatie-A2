@@ -162,19 +162,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FpsCam.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="HitSphere.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Vision.cpp" />
     <ClCompile Include="SpawnPoints.cpp" />
     <ClCompile Include="tigl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Coordinate.h" />
     <ClInclude Include="FpsCam.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Global.h" />
     <ClInclude Include="HitSphere.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="tigl.h" />
+    <ClInclude Include="Vision.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

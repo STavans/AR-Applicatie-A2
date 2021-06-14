@@ -4,6 +4,10 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/objdetect.hpp>
 #include <iostream>
+#include "Global.h"
+#include "Vision.h"
+
+#include "Coordinate.h"
 
 using namespace std;
 using namespace cv;
@@ -21,27 +25,35 @@ int distanceThreshold = 300;
 Scalar detection = Scalar(0, 0, 255);
 
 int thickness = 3;
-
-
-int scale = 1;
+VideoCapture cap(webcamID);
 
 int diameter = 40;
-int width = 640;
-int height = 480;
+
+int leftX;
+int leftY;
+int rightX;
+int rightY;
 
 void setVizor(bool isLeft, Rect area) {
 	int x = ((area.br().x - area.tl().x) / 2) + area.tl().x;
 	int y = ((area.br().y - area.tl().y) / 2) + area.tl().y;
-	circle(gameWindow, Point(x, y), (diameter * scale), detection, thickness);
+	circle(gameWindow, Point(x, y), (diameter * screenScale), detection, thickness);
 }
 
-int main() {
-	VideoCapture cap(webcamID);
+Coordinate getLeftVizor() {
 
-	while (true)
-	{
+
+}
+
+Coordinate getRightVizor() {
+
+
+}
+
+void CVView() {
+
 		gameWindow = imread(gameBackgroundPath);
-		resize(gameWindow, gameWindow, Size(width*scale, height*scale));
+		resize(gameWindow, gameWindow, Size(screenWidth*screenScale, screenHeight*screenScale));
 		cap.read(cam);
 		cam.copyTo(target);
 		cvtColor(target, target, COLOR_BGR2HSV);
@@ -53,7 +65,6 @@ int main() {
 		//find and draw contours
 		vector<vector<Point>> contours ;
 		findContours(mask, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
-			cout << "this is the balls amount:" << contours.size() << endl;
 		vector<Rect> leftContours, rightContours;
 		
 		bool leftactive = false;
@@ -64,20 +75,16 @@ int main() {
 		{
 			Rect contourbind = boundingRect(var);
 			if (contourbind.area()>distanceThreshold) {
-				if(contourbind.br().x<(width / 2) && !leftactive){
+				if(contourbind.br().x<(halfScreenWidth) && !leftactive){
 					setVizor(true, contourbind);
 					leftactive = true;
 				}
-				if(contourbind.tl().x> (width / 2) && !rightactive){
+				if(contourbind.tl().x> (halfScreenWidth) && !rightactive){
 					setVizor(false, contourbind);
 					rightactive = true;
 				}
 			}
 		}
-
-		imshow("camera", cam);
 		imshow("GameWindow", gameWindow);
 		waitKey(1);
 	}
-	return 1;
-}
