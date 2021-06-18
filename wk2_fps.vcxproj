@@ -161,6 +161,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\mainVisual.cpp" />
+    <ClCompile Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\ObjModel.cpp" />
+    <ClCompile Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\Texture.cpp" />
+    <ClCompile Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\tigl.cpp" />
     <ClCompile Include="FpsCam.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HitSphere.cpp" />
@@ -171,6 +175,10 @@
     <ClCompile Include="tigl.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\ObjModel.h" />
+    <ClInclude Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\stb_image.h" />
+    <ClInclude Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\Texture.h" />
+    <ClInclude Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\tigl.h" />
     <ClInclude Include="Coordinate.h" />
     <ClInclude Include="FpsCam.h" />
     <ClInclude Include="Game.h" />
