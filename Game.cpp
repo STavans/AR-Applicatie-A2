@@ -139,7 +139,7 @@ void Game::ResetAll() {
 	{
 		asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
 	}
-
+	state = StartScreen;
 	score = 0;
 }
 
