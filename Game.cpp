@@ -8,6 +8,7 @@
 #include "Global.h"
 #include "Vision.h"
 #include "Game.h"
+#include "mainVisual.h"
 #include <cmath>
 #include <vector>
 #include <algorithm>
@@ -229,23 +230,44 @@ void Game::spawnAsteroid() {
 
 void Game::openGameOverScreen() {
 //TODO: CODE Switch to game over screen
+	initScreen();
+
+	finalizeScreen();
 }
 
 void Game::openGameScreen() {
 	//TODO: CODE Switch to game screen
+	initScreen();
+
+	for (Asteroid* roid : asteroidList)
+	{
+		drawAsteroid(roid->x, roid->y, roid->z);
+	}
+
+	drawVizor(leftVizor.x, leftVizor.y);
+	drawVizor(rightVizor.x, rightVizor.y);
+
+	finalizeScreen();
 }
 
 void Game::openStartScreen() {
 	//TODO: CODE Switch to start screen
+	initScreen();
+
+
+	finalizeScreen();
 }
 
 void Game::explodeAsteroid(Asteroid* roid) {
 //TODO: OPENGL CODE EXPLOSION!!!
+	drawExplosion(roid->x, roid->y, roid->z);
 }
 
 void Game::updateLeftVizor(Coordinate left) {
 	//TODO: OPENGL CODE update the leftVizor to a new position
+	drawVizor(left.x, left.y);
 }
 void Game::updateRightVizor(Coordinate right) {
 	//TODO: OPENGL CODE updtae the rightVizor to new position
+	drawVizor(right.x, right.y);
 }

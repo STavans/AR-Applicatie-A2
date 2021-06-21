@@ -92,5 +92,8 @@
     <ClInclude Include="ObjModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="mainVisual.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

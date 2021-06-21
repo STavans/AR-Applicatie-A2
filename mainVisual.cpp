@@ -4,6 +4,7 @@
 #include "ObjModel.h"
 #include "Game.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include "mainVisual.h"
 using tigl::Vertex;
 
 #pragma comment(lib, "glfw3.lib")
@@ -61,7 +62,7 @@ void windowInit() {
 
 void updateGameFrame() {
     update();
-    draw();
+    //draw();
     glfwSwapBuffers(window);
     glfwPollEvents();
 }
@@ -130,7 +131,44 @@ void endLighting() {
     tigl::shader->enableLighting(false);
 }
 
-void draw()
+void drawStartScreen()
+{
+    initScreen();
+
+    //TODO
+    //vizorModel->draw(glm::vec3(0.0f, 5.0f, 1.0f));
+
+    finalizeScreen();
+}
+
+void drawEndScreen()
+{
+    initScreen();
+
+    //TODO 
+    //vizorModel->draw(glm::vec3(0.0f, 5.0f, 1.0f));
+
+    //TODO show score
+
+    finalizeScreen();
+}
+
+void drawAsteroid(int x, int y, int z)
+{
+    asteroidModel->draw(glm::vec3(x, y, z));
+}
+
+void drawExplosion(int x, int y, int z)
+{
+    explosionModel->draw(glm::vec3(x, y, z));
+}
+
+void drawVizor(int x, int y)
+{
+    vizorModel->draw(glm::vec3(x, y, 1.0f), glm::vec4(0.95f, 0.35f, 0.35f, 1.0f));
+}
+
+void initScreen()
 {
     //Clear window
     clearWindow();
@@ -141,7 +179,7 @@ void draw()
     glm::mat4 projection = glm::perspective(glm::radians(75.0f), viewport[2] / (float)viewport[3], 0.01f, 500.0f);
 
     tigl::shader->setProjectionMatrix(projection);
-    tigl::shader->setViewMatrix(glm::lookAt(glm::vec3(0,0,-15), glm::vec3(0,0,0), glm::vec3(0,1,0)));
+    tigl::shader->setViewMatrix(glm::lookAt(glm::vec3(0, 0, -15), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0)));
 
     glEnable(GL_DEPTH_TEST);
     tigl::shader->enableColor(true);
@@ -150,15 +188,9 @@ void draw()
 
     //Draw lighting
     startLighting();
+}
 
-    asteroidModel->draw(glm::vec3(0.0f, 0.0f, 20.0f));
-    //vizorModel->draw(glm::vec3(5.0f, 0.0f, 1.0f));
-    //vizorModel->draw(glm::vec3(-5.0f, 0.0f, 1.0f));
-    //vizorModel->draw(glm::vec3(0.0f, 5.0f, 1.0f));
-    vizorModel->draw(glm::vec3(0.0f, -5.0f, 1.0f), glm::vec4(0.95f, 0.35f, 0.35f, 1.0f));
-    explosionModel->draw(glm::vec3(0.0f, 0.0f, 20.0f));
-    //draw asteroids and vizor here
-
+void finalizeScreen()
+{
     endLighting();
-
 }

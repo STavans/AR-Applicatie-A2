@@ -181,6 +181,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="HitSphere.h" />
+    <ClInclude Include="mainVisual.h" />
     <ClInclude Include="ObjModel.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Texture.h" />
