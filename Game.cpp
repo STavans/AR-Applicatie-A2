@@ -13,17 +13,17 @@
 #include <algorithm>
 
 //-----------------------Vars-------------------
-//Vizor leftVizor, rightVizor;
-//
-//int score;
-//int state;
-//
-//std::vector<Asteroid*> asteroidList;
+Vizor leftVizor, rightVizor;
+
+int score;
+int state;
+
+std::vector<Asteroid*> asteroidList;
 Coordinate* SpawnPoints;
-//
-//const int StartScreen = 1;
-//const int GameScreen = 2;
-//const int EndScreen = 3;
+
+const int StartScreen = 1;
+const int GameScreen = 2;
+const int EndScreen = 3;
 
 /*
 void openGameOverScreen();

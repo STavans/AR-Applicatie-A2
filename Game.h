@@ -3,7 +3,6 @@
 #include "Asteroid.h"
 #include "Vizor.h"
 #include "Coordinate.h"
-#include "SpawnPoints.cpp"
 #include "Timer.h"
 #include "Global.h"
 #include "Vision.h"
@@ -21,14 +20,9 @@ public:
 
 	std::vector<Asteroid*> asteroidList;
 
-	const int StartScreen = 1;
-	const int GameScreen = 2;
-	const int EndScreen = 3;
-
 	void startUp();
 	void openGameOverScreen();
 	void spawnAsteroid();
-	void openGameOverScreen();
 	void openGameScreen();
 	void openStartScreen();
 	void explodeAsteroid(Asteroid* roid);
@@ -44,7 +38,6 @@ public:
 	bool enterButtonPressed();
 	void startGame();
 	void gamePlay();
-	void startGame();
 	bool readyToReset();
 	void gameCheck();
 	void ResetAll();

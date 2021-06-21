@@ -29,6 +29,7 @@ void updateGameFrame();
 int main(void)
 {
     windowInit();
+    game = new Game();
     game->startUp();
 
     while (!glfwWindowShouldClose(window))
