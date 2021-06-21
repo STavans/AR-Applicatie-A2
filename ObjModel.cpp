@@ -75,9 +75,6 @@ static inline std::string cleanLine(std::string line)
 	return line;
 }
 
-
-
-
 /**
 * Loads an object model
 */

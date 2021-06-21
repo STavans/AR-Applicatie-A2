@@ -254,7 +254,7 @@ void Game::openGameScreen() {
 	std::cout << "draw right vizor" << std::endl;
 	drawVizor(rightVizor.x, rightVizor.y);
 
-	Sleep(1000);
+	Sleep(10000);
 
 	finalizeScreen();
 }

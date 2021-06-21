@@ -139,7 +139,6 @@ void drawStartScreen()
 {
     initScreen();
 
-    //TODO
     startScreenModel->draw(glm::vec3(0.0f, 0.0f, 1.0f));
 
     finalizeScreen();
@@ -149,7 +148,7 @@ void drawEndScreen()
 {
     initScreen();
 
-    //TODO 
+    //TODO draw score
     endScreenModel->draw(glm::vec3(0.0f, 0.0f, 1.0f));
 
     finalizeScreen();
