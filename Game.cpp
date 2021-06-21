@@ -69,7 +69,7 @@ void Game::stateLoopSwitch() {
 			break;
 		case GameScreen:
 			gamePlay();
-			//gameCheck(); // verwijdert achtergrond
+			gameCheck(); 
 			increaseSpawn(true);
 			openGameScreen();
 			break;
@@ -126,7 +126,7 @@ void Game::gameCheck() {
 		checkSpawnable();
 		checkAsteroids();
 		updateAsteroidsLocation();
-		spawnAsteroid();
+		//spawnAsteroid();// verwijdert achtergrond
 		//TODO: remainder of the game logic -> lives if opted into the game
 
 	}
