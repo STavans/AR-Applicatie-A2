@@ -20,8 +20,6 @@ int state;
 std::vector<Asteroid*> asteroidList;
 Coordinate* SpawnPoints;
 
-int halfScreenWidth = screenWidth / 2;
-int gameSpeed = 0.005 * screenWidth;
 const int StartScreen = 1;
 const int GameScreen = 2;
 const int EndScreen = 3;
@@ -57,7 +55,7 @@ void Startup() {
 	openStartScreen();
 
 	// make an array of spawnpoints: int are screen parameters, need to change to stand values
-	SpawnPoints = RandomSpawnPoints(1000, 1000);
+	SpawnPoints = RandomSpawnPoints(screenWidth, screenHeight);
 	mainLoop();
 }
 

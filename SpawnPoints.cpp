@@ -5,7 +5,7 @@ using namespace std;
 /*
 * Makes an array of 30 coordinates which are used to randomize spawn
 */
-Coordinate * RandomSpawnPoints(int x, int y)
+inline Coordinate * RandomSpawnPoints(int x, int y)
 {
     Coordinate cArray[30];
 
