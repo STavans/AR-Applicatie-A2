@@ -33,10 +33,11 @@ Coordinate leftVizor;
 Coordinate rightVizor;
 
 void setVizor(bool isLeft, Rect area) {
-	int x = ((area.br().x - area.tl().x) / 2) + area.tl().x;
-	int y = ((area.br().y - area.tl().y) / 2) + area.tl().y;
+	int x = (((area.br().x - area.tl().x) / 2) + area.tl().x)- halfScreenWidth;
+	int y = (((area.br().y - area.tl().y) / 2) + area.tl().y)- (screenHeight/2);
 	if (isLeft)
 	{
+
 		leftVizor.x = x;
 		leftVizor.y = y;
 	}else{

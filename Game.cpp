@@ -79,6 +79,8 @@ void Game::gamePlay() {
 
 	rightVizor.x = right.x;
 	rightVizor.y = right.y;
+	std::cout << "right coord x = " << right.x <<endl;
+	std::cout << "rightvisor x" << rightVizor.x<<endl;
 }
 
 void Game::stateLoopSwitch() {
@@ -92,8 +94,8 @@ void Game::stateLoopSwitch() {
 			break;
 		case GameScreen:
 			gamePlay();
-			gameCheck();
-			increaseSpawn(true);
+			//gameCheck();
+			//increaseSpawn(true);
 			openGameScreen();
 			break;
 		case EndScreen:
@@ -243,20 +245,19 @@ void Game::openGameScreen() {
 	//TODO: CODE Switch to game screen
 	initScreen();
 
+std::cout << "draw left vizor" << std::endl;
+	drawVizor(leftVizor.x, leftVizor.y);
+	std::cout << "draw right vizor" << std::endl;
+	drawVizor(rightVizor.x, rightVizor.y);
+
 	for (Asteroid* roid : asteroidList)
 	{
 		std::cout << "draw asteroid" << std::endl;
 		drawAsteroid(roid->x, roid->y, roid->z);
 	}
 
-	std::cout << "draw left vizor" << std::endl;
-	drawVizor(leftVizor.x, leftVizor.y);
-	std::cout << "draw right vizor" << std::endl;
-	drawVizor(rightVizor.x, rightVizor.y);
-
-	Sleep(1000);
-
 	finalizeScreen();
+
 }
 
 void Game::explodeAsteroid(Asteroid* roid) {
