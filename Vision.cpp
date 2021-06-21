@@ -33,8 +33,11 @@ Coordinate leftVizor;
 Coordinate rightVizor;
 
 void setVizor(bool isLeft, Rect area) {
-	int x = (((area.br().x - area.tl().x) / 2) + area.tl().x)- halfScreenWidth;
-	int y = (((area.br().y - area.tl().y) / 2) + area.tl().y)- (screenHeight/2);
+	int x = (((area.br().x - area.tl().x) / 2) + area.tl().x);
+	int y = (((area.br().y - area.tl().y) / 2) + area.tl().y);
+	circle(gameWindow, Point(x, y), (diameter * screenScale), detection, thickness);
+	x -= halfScreenWidth;
+	y -= (screenHeight / 2);
 	if (isLeft)
 	{
 
@@ -45,7 +48,8 @@ void setVizor(bool isLeft, Rect area) {
 		rightVizor.y = y;
 	}
 
-	circle(gameWindow, Point(x, y), (diameter * screenScale), detection, thickness);
+	
+
 }
 
 Coordinate getLeftVizor() {
@@ -91,6 +95,6 @@ void CVView() {
 				}
 			}
 		}
-		imshow("GameWindow", gameWindow);
+		//imshow("GameWindow", gameWindow);
 		waitKey(1);
 	}

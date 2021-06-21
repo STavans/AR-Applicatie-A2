@@ -166,7 +166,7 @@ void drawExplosion(int x, int y, int z)
 
 void drawVizor(int x, int y)
 {
-    vizorModel->draw(glm::vec3(((x/100)*3), ((y/100)*-2.25), 1.0f), glm::vec4(0.95f, 0.35f, 0.35f, 1.0f));
+    vizorModel->draw(glm::vec3(((x/50)), ((-1*y/50)), 1.0f), glm::vec4(0.95f, 0.35f, 0.35f, 1.0f));
 }
 
 void initScreen()

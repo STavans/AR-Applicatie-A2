@@ -3,8 +3,8 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
-const int screenWidth = 640;
-const int screenHeight = 480;
+const int screenWidth = 1920;
+const int screenHeight = 1080;
 const int halfScreenWidth = screenWidth / 2;
 const int gameSpeed = 0.005 * screenWidth;
 const int minDepth = 20;

@@ -26,31 +26,6 @@ const int StartScreen = 1;
 const int GameScreen = 2;
 const int EndScreen = 3;
 
-/*
-void openGameOverScreen();
-void spawnAsteroid();
-void openGameOverScreen();
-void openGameScreen();
-void openStartScreen();
-void explodeAsteroid(Asteroid* roid);
-void updateLeftVizor(Coordinate left);
-void updateRightVizor(Coordinate right);
-void checkAsteroids();
-bool isOutTime();
-void checkSpawnable();
-void endGame();
-Coordinate generateRandomSpawn();
-void mainLoop();
-void stateLoopSwitch();
-bool enterButtonPressed();
-void startGame();
-void gamePlay();
-void startGame();
-bool readyToReset();
-void gameCheck();
-void ResetAll();
-void updateAsteroidsLocation();
-*/
 //--------------
 
 void Game::startUp() {
@@ -94,8 +69,8 @@ void Game::stateLoopSwitch() {
 			break;
 		case GameScreen:
 			gamePlay();
-			//gameCheck();
-			//increaseSpawn(true);
+			//gameCheck(); // verwijdert achtergrond
+			increaseSpawn(true);
 			openGameScreen();
 			break;
 		case EndScreen:
