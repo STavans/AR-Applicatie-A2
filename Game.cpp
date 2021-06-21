@@ -127,6 +127,7 @@ void Game::startGame() {
 bool Game::readyToReset() {
 	if (GetAsyncKeyState(VK_BACK))
 	{
+		state = StartScreen;
 		return true;
 	}
 	return false;
@@ -139,7 +140,7 @@ void Game::ResetAll() {
 	{
 		asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
 	}
-	state = StartScreen;
+	
 	score = 0;
 }
 
@@ -148,6 +149,7 @@ void Game::gameCheck() {
 		checkSpawnable();
 		checkAsteroids();
 		updateAsteroidsLocation();
+		spawnAsteroid();
 		//TODO: remainder of the game logic -> lives if opted into the game
 
 	}
@@ -223,7 +225,7 @@ Coordinate Game::generateRandomSpawn() {
 
 void Game::checkSpawnable() {
 	double t = (10 - getDifficulty()) / 2;
-
+	
 	if (fmod(getElapsedSeconds() , t) == 0) {
 		spawnAsteroid();
 	}
@@ -243,11 +245,13 @@ void Game::openGameScreen() {
 
 	for (Asteroid* roid : asteroidList)
 	{
-		std::cout << "draw asterroid" << std::endl;
+		std::cout << "draw asteroid" << std::endl;
 		drawAsteroid(roid->x, roid->y, roid->z);
 	}
 
+	std::cout << "draw left vizor" << std::endl;
 	drawVizor(leftVizor.x, leftVizor.y);
+	std::cout << "draw right vizor" << std::endl;
 	drawVizor(rightVizor.x, rightVizor.y);
 
 	finalizeScreen();
