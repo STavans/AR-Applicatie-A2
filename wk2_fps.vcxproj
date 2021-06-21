@@ -165,9 +165,7 @@
     <ClCompile Include="FpsCam.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HitSphere.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="mainVisual.cpp" />
-    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="ObjModel.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -183,7 +181,6 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="HitSphere.h" />
-    <ClInclude Include="Menu.h" />
     <ClInclude Include="ObjModel.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Texture.h" />

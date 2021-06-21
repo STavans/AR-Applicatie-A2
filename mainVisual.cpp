@@ -44,7 +44,7 @@ void updateGameFrame() {
     glfwPollEvents();
 }
 
-int main4(void)
+int main(void)
 {
     windowInit();
 
