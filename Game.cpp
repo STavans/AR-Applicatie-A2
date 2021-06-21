@@ -58,7 +58,7 @@ void Game::startUp() {
 	drawStartScreen();
 
 	// make an array of spawnpoints: int are screen parameters, need to change to stand values
-	//SpawnPoints = RandomSpawnPoints(screenWidth, screenHeight);
+	SpawnPoints = RandomSpawnPoints(screenWidth, screenHeight);
 	mainLoop();
 }
 
@@ -73,8 +73,12 @@ void Game::gamePlay() {
 	CVView();
 	Coordinate left = getLeftVizor();
 	Coordinate right = getRightVizor();
-	updateLeftVizor(left);
-	updateRightVizor(right);
+	
+	leftVizor.x = left.x;
+	leftVizor.y = left.y;
+
+	rightVizor.x = right.x;
+	rightVizor.y = right.y;
 }
 
 void Game::stateLoopSwitch() {
@@ -90,6 +94,7 @@ void Game::stateLoopSwitch() {
 			gamePlay();
 			gameCheck();
 			increaseSpawn(true);
+			openGameScreen();
 			break;
 		case EndScreen:
 			if (readyToReset())
@@ -128,8 +133,12 @@ bool Game::readyToReset() {
 }
 
 void Game::ResetAll() {
-	//TODO: CODE reset all values of score, asteroid list.
-	//			if settings used do NOT reset Settings!!!
+	//            if settings used do NOT reset Settings!!!
+
+	for (Asteroid* roid : asteroidList)        //Loops through the asteroids to delete them all.
+	{
+		asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
+	}
 
 	score = 0;
 }
@@ -234,6 +243,7 @@ void Game::openGameScreen() {
 
 	for (Asteroid* roid : asteroidList)
 	{
+		std::cout << "draw asterroid" << std::endl;
 		drawAsteroid(roid->x, roid->y, roid->z);
 	}
 
@@ -246,13 +256,4 @@ void Game::openGameScreen() {
 void Game::explodeAsteroid(Asteroid* roid) {
 //TODO: OPENGL CODE EXPLOSION!!!
 	drawExplosion(roid->x, roid->y, roid->z);
-}
-
-void Game::updateLeftVizor(Coordinate left) {
-	//TODO: OPENGL CODE update the leftVizor to a new position
-	drawVizor(left.x, left.y);
-}
-void Game::updateRightVizor(Coordinate right) {
-	//TODO: OPENGL CODE updtae the rightVizor to new position
-	drawVizor(right.x, right.y);
 }

@@ -64,7 +64,6 @@ void windowInit() {
 
 void updateGameFrame() {
     update();
-    //draw();
     glfwSwapBuffers(window);
     glfwPollEvents();
 }
