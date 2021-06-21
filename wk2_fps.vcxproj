@@ -161,32 +161,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\mainVisual.cpp" />
-    <ClCompile Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\ObjModel.cpp" />
-    <ClCompile Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\Texture.cpp" />
-    <ClCompile Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\tigl.cpp" />
+    <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="FpsCam.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HitSphere.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mainVisual.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="ObjModel.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Vision.cpp" />
     <ClCompile Include="SpawnPoints.cpp" />
     <ClCompile Include="tigl.cpp" />
+    <ClCompile Include="Vizor.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\ObjModel.h" />
-    <ClInclude Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\stb_image.h" />
-    <ClInclude Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\Texture.h" />
-    <ClInclude Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\tigl.h" />
+    <ClInclude Include="Asteroid.h" />
     <ClInclude Include="Coordinate.h" />
     <ClInclude Include="FpsCam.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="HitSphere.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="ObjModel.h" />
+    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="tigl.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="Vision.h" />
+    <ClInclude Include="Vizor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

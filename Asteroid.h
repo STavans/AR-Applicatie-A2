@@ -6,11 +6,6 @@
 #include "Asteroid.h"
 
 /*
-* Checks if a asteroid is shot
-*/
-bool shotCheck(Vizor, Asteroid);
-
-/*
 * Asteroid class with all attributes and functions
 */
 class Asteroid {
@@ -27,3 +22,9 @@ public:
 	bool shotCheck(Vizor vizor, Asteroid asteroid);
 
 };
+
+/*
+* Checks if a asteroid is shot
+*/
+bool shotCheck(Vizor, Asteroid*);
+

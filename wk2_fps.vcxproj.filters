@@ -39,16 +39,22 @@
     <ClCompile Include="Vision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\mainVisual.cpp">
+    <ClCompile Include="Asteroid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\Texture.cpp">
+    <ClCompile Include="Vizor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\tigl.cpp">
+    <ClCompile Include="Timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\ObjModel.cpp">
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainVisual.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,17 +83,23 @@
     <ClInclude Include="Vision.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\ObjModel.h">
+    <ClInclude Include="Asteroid.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\stb_image.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Vizor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\Texture.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Downloads\wk2_modelloader\wk2_modelloader\tigl.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjModel.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
