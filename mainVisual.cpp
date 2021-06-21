@@ -15,6 +15,7 @@ GLFWwindow* window;
 ObjModel* asteroidModel;
 ObjModel* vizorModel;
 ObjModel* explosionModel;
+ObjModel* startScreenModel;
 Game* game;
 
 
@@ -79,6 +80,7 @@ void init()
     asteroidModel = new ObjModel("models/asteroid/asteroid4.obj");
     vizorModel = new ObjModel("models/vizor/vizor.obj");
     explosionModel = new ObjModel("models/explosion/explosion2.obj");
+    startScreenModel = new ObjModel("models/text/StartScreen.obj");
 }
 
 float rotation = 0;
@@ -136,7 +138,7 @@ void drawStartScreen()
     initScreen();
 
     //TODO
-    vizorModel->draw(glm::vec3(0.0f, 5.0f, 1.0f));
+    startScreenModel->draw(glm::vec3(0.0f, 0.0f, 1.0f));
 
     finalizeScreen();
 }
@@ -146,9 +148,7 @@ void drawEndScreen()
     initScreen();
 
     //TODO 
-    //vizorModel->draw(glm::vec3(0.0f, 5.0f, 1.0f));
-
-    //TODO show score
+    startScreenModel->draw(glm::vec3(0.0f, 0.0f, 1.0f));
 
     finalizeScreen();
 }
@@ -196,4 +196,5 @@ void finalizeScreen()
 {
     endLighting();
     std::cout << "Screen finalized" << std::endl;
+    updateGameFrame();
 }
