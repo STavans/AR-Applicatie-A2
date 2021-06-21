@@ -136,7 +136,7 @@ void drawStartScreen()
     initScreen();
 
     //TODO
-    //vizorModel->draw(glm::vec3(0.0f, 5.0f, 1.0f));
+    vizorModel->draw(glm::vec3(0.0f, 5.0f, 1.0f));
 
     finalizeScreen();
 }
@@ -188,9 +188,12 @@ void initScreen()
 
     //Draw lighting
     startLighting();
+
+    std::cout << "Screen initialized" << std::endl;
 }
 
 void finalizeScreen()
 {
     endLighting();
+    std::cout << "Screen finalized" << std::endl;
 }

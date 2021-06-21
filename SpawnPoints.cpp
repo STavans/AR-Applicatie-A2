@@ -44,11 +44,6 @@ inline Coordinate * RandomSpawnPoints(int x, int y)
         cArray[i + 20] = c;
     }
 
-    for (Coordinate c : cArray)
-    {
-        c.printCoordinate();
-    }
-
     // returns array of spawnpoints
     return cArray;
 }

@@ -2,5 +2,7 @@
 void drawAsteroid(int x, int y, int z);
 void drawExplosion(int x, int y, int z);
 void drawVizor(int x, int y);
+void drawStartScreen();
+void drawEndScreen();
 void initScreen();
 void finalizeScreen();

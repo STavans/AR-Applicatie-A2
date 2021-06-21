@@ -55,10 +55,10 @@ void updateAsteroidsLocation();
 
 void Game::startUp() {
 	state = StartScreen;
-	openStartScreen();
+	drawStartScreen();
 
 	// make an array of spawnpoints: int are screen parameters, need to change to stand values
-	SpawnPoints = RandomSpawnPoints(screenWidth, screenHeight);
+	//SpawnPoints = RandomSpawnPoints(screenWidth, screenHeight);
 	mainLoop();
 }
 
@@ -94,7 +94,7 @@ void Game::stateLoopSwitch() {
 		case EndScreen:
 			if (readyToReset())
 			{
-				openStartScreen();
+				drawStartScreen();
 				ResetAll();
 			}
 			break;
@@ -113,7 +113,7 @@ bool Game::enterButtonPressed() {
 
 void Game::startGame() {
 	state = GameScreen;
-	openGameScreen();
+	drawStartScreen();
 	//TODE: CODE Generate asteroid list with spawnpoint / delete/done?
 
 	timerStart();
@@ -203,7 +203,7 @@ void Game::endGame() {
 	state = EndScreen;
 	timerStop();
 	increaseSpawn(false);
-	openGameOverScreen();
+	drawEndScreen();
 	//TODE: TODO: OPT: Show Score on Screen
 	//showScore(score);
 }
@@ -228,13 +228,6 @@ void Game::spawnAsteroid() {
 //-------------OPENGL/visuals-------------
 //Move these to open GL later
 
-void Game::openGameOverScreen() {
-//TODO: CODE Switch to game over screen
-	initScreen();
-
-	finalizeScreen();
-}
-
 void Game::openGameScreen() {
 	//TODO: CODE Switch to game screen
 	initScreen();
@@ -246,14 +239,6 @@ void Game::openGameScreen() {
 
 	drawVizor(leftVizor.x, leftVizor.y);
 	drawVizor(rightVizor.x, rightVizor.y);
-
-	finalizeScreen();
-}
-
-void Game::openStartScreen() {
-	//TODO: CODE Switch to start screen
-	initScreen();
-
 
 	finalizeScreen();
 }
