@@ -7,23 +7,25 @@
 #include "Timer.h"
 #include "Global.h"
 #include "Vision.h"
+#include "Game.h"
 #include <cmath>
 #include <vector>
 #include <algorithm>
 
 //-----------------------Vars-------------------
-Vizor leftVizor, rightVizor;
-
-int score;
-int state;
-
-std::vector<Asteroid*> asteroidList;
+//Vizor leftVizor, rightVizor;
+//
+//int score;
+//int state;
+//
+//std::vector<Asteroid*> asteroidList;
 Coordinate* SpawnPoints;
+//
+//const int StartScreen = 1;
+//const int GameScreen = 2;
+//const int EndScreen = 3;
 
-const int StartScreen = 1;
-const int GameScreen = 2;
-const int EndScreen = 3;
-
+/*
 void openGameOverScreen();
 void spawnAsteroid();
 void openGameOverScreen();
@@ -47,10 +49,10 @@ bool readyToReset();
 void gameCheck();
 void ResetAll();
 void updateAsteroidsLocation();
-
+*/
 //--------------
 
-void Startup() {
+void Game::startUp() {
 	state = StartScreen;
 	openStartScreen();
 
@@ -59,14 +61,14 @@ void Startup() {
 	mainLoop();
 }
 
-void mainLoop(){
+void Game::mainLoop(){
 	while (true)
 	{
 		stateLoopSwitch();
 	}
 }
 
-void gamePlay() {
+void Game::gamePlay() {
 	CVView();
 	Coordinate left = getLeftVizor();
 	Coordinate right = getRightVizor();
@@ -74,7 +76,7 @@ void gamePlay() {
 	updateRightVizor(right);
 }
 
-void stateLoopSwitch() {
+void Game::stateLoopSwitch() {
 	switch (state)
 	{
 		case StartScreen:
@@ -100,7 +102,7 @@ void stateLoopSwitch() {
 	}
 }
 
-bool enterButtonPressed() {
+bool Game::enterButtonPressed() {
 	if (GetAsyncKeyState(VK_RETURN))
 	{
 		return true;
@@ -108,7 +110,7 @@ bool enterButtonPressed() {
 	return false;
 }
 
-void startGame() {
+void Game::startGame() {
 	state = GameScreen;
 	openGameScreen();
 	//TODE: CODE Generate asteroid list with spawnpoint / delete/done?
@@ -116,7 +118,7 @@ void startGame() {
 	timerStart();
 }
 
-bool readyToReset() {
+bool Game::readyToReset() {
 	if (GetAsyncKeyState(VK_BACK))
 	{
 		return true;
@@ -124,14 +126,14 @@ bool readyToReset() {
 	return false;
 }
 
-void ResetAll() {
+void Game::ResetAll() {
 	//TODO: CODE reset all values of score, asteroid list.
 	//			if settings used do NOT reset Settings!!!
 
 	score = 0;
 }
 
-void gameCheck() {
+void Game::gameCheck() {
 	if (!isOutTime() && !GetAsyncKeyState(VK_ESCAPE)) {		//Checks if either the time is up or if escape key is pressed
 		checkSpawnable();
 		checkAsteroids();
@@ -144,7 +146,7 @@ void gameCheck() {
 	}
 }
 
-void checkAsteroids() {
+void Game::checkAsteroids() {
 	for(Asteroid* roid : asteroidList)
 	{
 		if ((shotCheck(leftVizor, roid)||shotCheck(rightVizor, roid))&&roid->z > minDepth) {
@@ -164,7 +166,7 @@ Coordinate* centerPoint = new Coordinate();
 int rotationSpeed = 15;
 double debtSpeed = (maxDepth - minDepth) / 10.0;
 
-void updateAsteroidsLocation() {
+void Game::updateAsteroidsLocation() {
 	centerPoint->x = halfScreenWidth;
 	centerPoint->y = 0;
 
@@ -188,7 +190,7 @@ void updateAsteroidsLocation() {
 	}
 }
 
-bool isOutTime() {
+bool Game::isOutTime() {
 	if (getElapsedSeconds() > 300.0)
 	{
 		return true;
@@ -196,7 +198,7 @@ bool isOutTime() {
 	return false;
 }
 
-void endGame() {
+void Game::endGame() {
 	state = EndScreen;
 	timerStop();
 	increaseSpawn(false);
@@ -205,11 +207,11 @@ void endGame() {
 	//showScore(score);
 }
 
-Coordinate generateRandomSpawn() {
+Coordinate Game::generateRandomSpawn() {
 	return SpawnPoints[rand() % 30];
 }
 
-void checkSpawnable() {
+void Game::checkSpawnable() {
 	double t = (10 - getDifficulty()) / 2;
 
 	if (fmod(getElapsedSeconds() , t) == 0) {
@@ -217,7 +219,7 @@ void checkSpawnable() {
 	}
 }
 
-void spawnAsteroid() {
+void Game::spawnAsteroid() {
 	Asteroid* roid = new Asteroid(5, 100, 0, 100, generateRandomSpawn());
 	asteroidList.push_back(roid);
 }
@@ -225,25 +227,25 @@ void spawnAsteroid() {
 //-------------OPENGL/visuals-------------
 //Move these to open GL later
 
-void openGameOverScreen() {
+void Game::openGameOverScreen() {
 //TODO: CODE Switch to game over screen
 }
 
-void openGameScreen() {
+void Game::openGameScreen() {
 	//TODO: CODE Switch to game screen
 }
 
-void openStartScreen() {
+void Game::openStartScreen() {
 	//TODO: CODE Switch to start screen
 }
 
-void explodeAsteroid(Asteroid* roid) {
+void Game::explodeAsteroid(Asteroid* roid) {
 //TODO: OPENGL CODE EXPLOSION!!!
 }
 
-void updateLeftVizor(Coordinate left) {
+void Game::updateLeftVizor(Coordinate left) {
 	//TODO: OPENGL CODE update the leftVizor to a new position
 }
-void updateRightVizor(Coordinate right) {
+void Game::updateRightVizor(Coordinate right) {
 	//TODO: OPENGL CODE updtae the rightVizor to new position
 }

@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include "tigl.h"
 #include "ObjModel.h"
+#include "Game.h"
 #include <glm/gtc/matrix_transform.hpp>
 using tigl::Vertex;
 
@@ -13,6 +14,8 @@ GLFWwindow* window;
 ObjModel* asteroidModel;
 ObjModel* vizorModel;
 ObjModel* explosionModel;
+Game* game;
+
 
 int widthWindow = 1920;
 int heightWindow = 1080;
@@ -20,6 +23,24 @@ int heightWindow = 1080;
 void init();
 void update();
 void draw();
+void windowInit();
+void updateGameFrame();
+
+int main(void)
+{
+    windowInit();
+    game->startUp();
+
+    while (!glfwWindowShouldClose(window))
+    {
+        updateGameFrame();
+    }
+
+    glfwTerminate();
+
+
+    return 0;
+}
 
 void windowInit() {
     if (!glfwInit())
@@ -43,24 +64,6 @@ void updateGameFrame() {
     glfwSwapBuffers(window);
     glfwPollEvents();
 }
-
-int main(void)
-{
-    windowInit();
-
-	while (!glfwWindowShouldClose(window))
-	{
-        updateGameFrame();
-	}
-
-	glfwTerminate();
-
-
-    return 0;
-}
-
-
-
 
 void init()
 {
