@@ -113,7 +113,7 @@ bool Game::enterButtonPressed() {
 
 void Game::startGame() {
 	state = GameScreen;
-	drawStartScreen();
+	openGameScreen();
 	//TODE: CODE Generate asteroid list with spawnpoint / delete/done?
 
 	timerStart();

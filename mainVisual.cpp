@@ -16,6 +16,7 @@ ObjModel* asteroidModel;
 ObjModel* vizorModel;
 ObjModel* explosionModel;
 ObjModel* startScreenModel;
+ObjModel* endScreenModel;
 Game* game;
 
 
@@ -81,6 +82,8 @@ void init()
     vizorModel = new ObjModel("models/vizor/vizor.obj");
     explosionModel = new ObjModel("models/explosion/explosion2.obj");
     startScreenModel = new ObjModel("models/text/StartScreen.obj");
+    endScreenModel = new ObjModel("models/text/gameover.obj");
+    
 }
 
 float rotation = 0;
@@ -148,7 +151,7 @@ void drawEndScreen()
     initScreen();
 
     //TODO 
-    startScreenModel->draw(glm::vec3(0.0f, 0.0f, 1.0f));
+    endScreenModel->draw(glm::vec3(0.0f, 0.0f, 1.0f));
 
     finalizeScreen();
 }

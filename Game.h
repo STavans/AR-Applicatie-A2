@@ -21,10 +21,8 @@ public:
 	std::vector<Asteroid*> asteroidList;
 
 	void startUp();
-	void openGameOverScreen();
 	void spawnAsteroid();
 	void openGameScreen();
-	void openStartScreen();
 	void explodeAsteroid(Asteroid* roid);
 	void updateLeftVizor(Coordinate left);
 	void updateRightVizor(Coordinate right);
