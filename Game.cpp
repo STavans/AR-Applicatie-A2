@@ -6,7 +6,7 @@
 #include "SpawnPoints.cpp"
 #include "Timer.h"
 #include "Global.h"
-//#include "Vision.h"
+#include "Vision.h"
 #include "Game.h"
 #include "mainVisual.h"
 #include <cmath>
@@ -14,13 +14,13 @@
 #include <algorithm>
 
 //-----------------------Vars-------------------
-Vizor leftVizor, rightVizor;
+Vizor leftVizor{50, 0, 0}, rightVizor{50, 0, 0};
 
 int score;
 int state;
 
 std::vector<Asteroid*> asteroidList{};
-Coordinate* SpawnPoints;
+vector<Coordinate> SpawnPoints;
 
 const int StartScreen = 1;
 const int GameScreen = 2;
@@ -33,7 +33,7 @@ void Game::startUp() {
 	drawStartScreen();
 
 	// make an array of spawnpoints: int are screen parameters, need to change to stand values
-	SpawnPoints = RandomSpawnPoints(screenWidth, screenHeight);
+	SpawnPoints = RandomSpawnPoints(100, 100);
 	mainLoop();
 }
 
@@ -45,17 +45,17 @@ void Game::mainLoop(){
 }
 
 void Game::gamePlay() {
-	//CVView();
-	//Coordinate left = getLeftVizor();
-	//Coordinate right = getRightVizor();
-	//
-	//leftVizor.x = left.x;
-	//leftVizor.y = left.y;
-	//
-	//rightVizor.x = right.x;
-	//rightVizor.y = right.y;
-	//std::cout << "right coord x = " << right.x <<endl;
-	//std::cout << "rightvisor x" << rightVizor.x<<endl;
+	CVView();
+	Coordinate left = getLeftVizor();
+	Coordinate right = getRightVizor();
+	
+	leftVizor.x = left.x;
+	leftVizor.y = left.y;
+	
+	rightVizor.x = right.x;
+	rightVizor.y = right.y;
+	std::cout << "right coord x = " << right.x <<endl;
+	std::cout << "rightvisor x" << rightVizor.x<<endl;
 }
 
 void Game::stateLoopSwitch() {
@@ -158,18 +158,25 @@ int rotationSpeed = 15;
 double debtSpeed = (maxDepth - minDepth) / 10.0;
 
 void Game::updateAsteroidsLocation() {
-	centerPoint->x = halfScreenWidth;
+	centerPoint->x = 0;
 	centerPoint->y = 0;
 
 	for (Asteroid* roid : asteroidList) {
-		double a = (centerPoint->y - roid->y) / (centerPoint->x - roid->x);
+		double a;
+		if (centerPoint->x - roid->x == 0) {
+			a = 0;
+		}
+		else {
+			a = (centerPoint->y - roid->y) / (centerPoint->x - roid->x);
+		}
+		//double a = (centerPoint->y - roid->y) / (centerPoint->x - roid->x);
 		double b = -a * roid->x + roid->y;
 
-		if (roid->x < halfScreenWidth)
+		if (roid->x < 0)
 		{
 			roid->x += gameSpeed;
 		}
-		else if (roid->x > halfScreenWidth) {
+		else if (roid->x > 0) {
 			roid->x -= gameSpeed;
 		}
 		
@@ -182,7 +189,7 @@ void Game::updateAsteroidsLocation() {
 }
 
 bool Game::isOutTime() {
-	if (getElapsedSeconds() > 300.0)
+	if (getElapsedSeconds() > 30.0)
 	{
 		return true;
 	}
@@ -211,7 +218,7 @@ void Game::checkSpawnable() {
 }
 
 void Game::spawnAsteroid() {
-	Asteroid* roid = new Asteroid(5, 100, 0, 100, generateRandomSpawn());
+	Asteroid* roid = new Asteroid(5, 100, 50, 100, generateRandomSpawn());
 	asteroidList.push_back(roid);
 }
 

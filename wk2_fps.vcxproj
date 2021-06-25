@@ -171,6 +171,7 @@
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="SpawnPoints.cpp" />
     <ClCompile Include="tigl.cpp" />
+    <ClCompile Include="Vision.cpp" />
     <ClCompile Include="Vizor.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +187,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="tigl.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Vision.h" />
     <ClInclude Include="Vizor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
