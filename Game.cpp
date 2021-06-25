@@ -128,7 +128,7 @@ void Game::gameCheck() {
 		checkSpawnable();
 		checkAsteroids();
 		updateAsteroidsLocation();
-		//spawnAsteroid();// verwijdert achtergrond
+		spawnAsteroid();// verwijdert achtergrond
 		//TODO: remainder of the game logic -> lives if opted into the game
 
 	}
@@ -229,7 +229,7 @@ void Game::openGameScreen() {
 
 	for (Asteroid* roid : asteroidList)
 	{
-		std::cout << "draw asteroid" << std::endl;
+		std::cout << "draw asteroid: (" << roid->x << "," << roid->y << "," << roid-> y << ")" << std::endl;
 		drawAsteroid(roid->x, roid->y, roid->z);
 	}
 

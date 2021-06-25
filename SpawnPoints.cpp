@@ -13,8 +13,8 @@ inline Coordinate * RandomSpawnPoints(int x, int y)
     for (int i = 0; i < 10; i++)
     {
         Coordinate c;
-        c.x = 0;
-        c.y = rand() % y;
+        c.x = x/6 + (rand() % x/2);
+        c.y = rand() % y / 2;
 
         cArray[i] = c;
     }
