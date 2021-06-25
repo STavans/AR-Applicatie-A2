@@ -4,8 +4,8 @@
 
 #include "Coordinate.h"
 
-Coordinate getLeftVizor();
-Coordinate getRightVizor();
-void CVView();
+Coordinate getLeftVizorCoord();
+Coordinate getRightVizorCoord();
+void updateVision();
 
 #endif
