@@ -2,7 +2,7 @@
 #include <GLFW/glfw3.h>
 #include "tigl.h"
 #include "ObjModel.h"
-#include "Game.h"
+#include <iostream>
 #include <glm/gtc/matrix_transform.hpp>
 #include "Visuals.h"
 #include "SubModules.h"
@@ -72,6 +72,31 @@ void finalizeLighting() {
     tigl::shader->enableLighting(false);
 }
 
+void clearWindow() {
+    glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void drawBackground() {
+    glm::vec4 purple = glm::vec4(0.15f, 0.0f, 0.19f, 1);
+    glm::vec4 darkgray = glm::vec4(0.1f, 0.10f, 0.1f, 1);
+
+    //Draw background
+    tigl::begin(GL_QUADS);
+    tigl::addVertex(Vertex::PC(glm::vec3(200, -100, 100), darkgray));
+    tigl::addVertex(Vertex::PC(glm::vec3(200, 0, 100), purple));
+    tigl::addVertex(Vertex::PC(glm::vec3(-200, 0, 100), purple));
+    tigl::addVertex(Vertex::PC(glm::vec3(-200, -100, 100), darkgray));
+    tigl::end();
+
+    tigl::begin(GL_QUADS);
+    tigl::addVertex(Vertex::PC(glm::vec3(200, 100, 100), darkgray));
+    tigl::addVertex(Vertex::PC(glm::vec3(200, 0, 100), purple));
+    tigl::addVertex(Vertex::PC(glm::vec3(-200, 0, 100), purple));
+    tigl::addVertex(Vertex::PC(glm::vec3(-200, 100, 100), darkgray));
+    tigl::end();
+}
+
 void initScreen() {
     //Clear window
     clearWindow();
@@ -109,31 +134,6 @@ void updateGameFrame() {
 
 void updateRotation() {
     rotation += 5.0f;
-}
-
-void clearWindow() {
-    glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-}
-
-void drawBackground() {
-    glm::vec4 purple = glm::vec4(0.15f, 0.0f, 0.19f, 1);
-    glm::vec4 darkgray = glm::vec4(0.1f, 0.10f, 0.1f, 1);
-
-    //Draw background
-    tigl::begin(GL_QUADS);
-    tigl::addVertex(Vertex::PC(glm::vec3(200, -100, 100), darkgray));
-    tigl::addVertex(Vertex::PC(glm::vec3(200, 0, 100), purple));
-    tigl::addVertex(Vertex::PC(glm::vec3(-200, 0, 100), purple));
-    tigl::addVertex(Vertex::PC(glm::vec3(-200, -100, 100), darkgray));
-    tigl::end();
-
-    tigl::begin(GL_QUADS);
-    tigl::addVertex(Vertex::PC(glm::vec3(200, 100, 100), darkgray));
-    tigl::addVertex(Vertex::PC(glm::vec3(200, 0, 100), purple));
-    tigl::addVertex(Vertex::PC(glm::vec3(-200, 0, 100), purple));
-    tigl::addVertex(Vertex::PC(glm::vec3(-200, 100, 100), darkgray));
-    tigl::end();
 }
 
 void drawAsteroid(float x, float y, float z) {

@@ -1,7 +1,6 @@
 #include "Game.h"
 #include "SubModules.h"
 
-void stateMachine();
 void mainLoop();
 void initializeSubModels();
 
@@ -21,19 +20,3 @@ void mainLoop() {
 	}
 }
 
-void stateMachine() {
-	switch (state)
-	{
-	case StartScreen:
-		runStartScreenState();
-		break;
-	case GameScreen:
-		runGameScreenState();
-		break;
-	case EndScreen:
-		runEndScreenState();
-		break;
-	default:
-		break;
-	}
-}

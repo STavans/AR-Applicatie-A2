@@ -6,7 +6,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "tigl.h"
-#include "Texture.h"
 
 using tigl::Vertex;
 
@@ -309,7 +308,7 @@ void ObjModel::loadMaterialFile( const std::string &fileName, const std::string 
 			if (tex.find("\\"))
 				tex = tex.substr(tex.rfind("\\") + 1);
 			//TODO
-			currentMaterial->texture = new Texture(dirName + "/" + tex);
+			//currentMaterial->texture = new Texture(dirName + "/" + tex);*/
 		} 
 		else if (params[0] == "kd")
 		{//TODO, diffuse color

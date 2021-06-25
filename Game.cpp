@@ -13,11 +13,13 @@
 #include <vector>
 #include <algorithm>
 #include "SubModules.h"
+#include "GameLogic.h"
 
 //-----------------------Vars-------------------
 Vizor leftVizor, rightVizor;
 
 int score;
+int state = 1;
 
 std::vector<Asteroid*> asteroidList;
 Coordinate* SpawnPoints;
@@ -80,6 +82,23 @@ void runEndScreenState() {
 	}
 }
 
+void stateMachine() {
+	switch (state)
+	{
+	case StartScreen:
+		runStartScreenState();
+		break;
+	case GameScreen:
+		runGameScreenState();
+		break;
+	case EndScreen:
+		runEndScreenState();
+		break;
+	default:
+		break;
+	}
+}
+
 bool enterButtonPressed() {
 	if (GetAsyncKeyState(VK_RETURN))
 	{
@@ -125,7 +144,7 @@ void gameCheck() {
 void checkAsteroids() {
 	for(Asteroid* roid : asteroidList)
 	{
-		if ((shotCheck(leftVizor, roid)||shotCheck(rightVizor, roid))&&roid->z > minDepth) {
+		if ((vizorAsteroidOverlapCheck(leftVizor, roid)||vizorAsteroidOverlapCheck(rightVizor, roid))&&roid->z > minDepth) {
 			score += roid->reward;
 			explodeAsteroid(roid);
 			asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());

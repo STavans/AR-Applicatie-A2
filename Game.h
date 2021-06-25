@@ -10,11 +10,11 @@
 #include <vector>
 #include <algorithm>
 
-extern int state = 1;
 const int StartScreen = 1;
 const int GameScreen = 2;
 const int EndScreen = 3;
 
+void stateMachine();
 void spawnAsteroid();
 void openGameScreen();
 void explodeAsteroid(Asteroid* roid);
@@ -24,7 +24,6 @@ void checkSpawnable();
 void endGame();
 Coordinate generateRandomSpawn();
 void mainLoop();
-void stateLoopSwitch();
 bool enterButtonPressed();
 void startGame();
 void gamePlay();

@@ -162,12 +162,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Asteroid.cpp" />
-    <ClCompile Include="FpsCam.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="HitSphere.cpp" />
-    <ClCompile Include="mainVisual.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Visuals.cpp" />
     <ClCompile Include="ObjModel.cpp" />
-    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Vision.cpp" />
     <ClCompile Include="SpawnPoints.cpp" />
@@ -177,14 +177,14 @@
   <ItemGroup>
     <ClInclude Include="Asteroid.h" />
     <ClInclude Include="Coordinate.h" />
-    <ClInclude Include="FpsCam.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameLogic.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="HitSphere.h" />
-    <ClInclude Include="mainVisual.h" />
+    <ClInclude Include="SubModules.h" />
+    <ClInclude Include="Visuals.h" />
     <ClInclude Include="ObjModel.h" />
     <ClInclude Include="stb_image.h" />
-    <ClInclude Include="Texture.h" />
     <ClInclude Include="tigl.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Vision.h" />
