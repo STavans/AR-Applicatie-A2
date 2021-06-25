@@ -16,13 +16,13 @@
 #include "GameLogic.h"
 
 //-----------------------Vars-------------------
-Vizor leftVizor, rightVizor;
+Vizor leftVizor{ 50, 0, 0 }, rightVizor{ 50, 0, 0 };
 
 int score;
 int state = 1;
 
-std::vector<Asteroid*> asteroidList;
-Coordinate* SpawnPoints;
+std::vector<Asteroid*> asteroidList{};
+vector<Coordinate> SpawnPoints;
 
 Coordinate* centerPoint = new Coordinate();
 int rotationSpeed = 15;
@@ -35,7 +35,8 @@ void initializeGame() {
 	drawStartScreen();
 
 	// make an array of spawnpoints: int are screen parameters, need to change to stand values
-	SpawnPoints = RandomSpawnPoints(screenWidth, screenHeight);
+	//SpawnPoints = RandomSpawnPoints(screenWidth, screenHeight);
+	SpawnPoints = RandomSpawnPoints(100, 100);
 }
 
 void gamePlay() {
@@ -68,10 +69,11 @@ void runStartScreenState() {
 }
 
 void runGameScreenState() {
+	openGameScreen();
 	gamePlay();
 	gameCheck();
 	increaseSpawn(true);
-	openGameScreen();
+
 }
 
 void runEndScreenState() {
@@ -132,7 +134,7 @@ void gameCheck() {
 		checkSpawnable();
 		checkAsteroids();
 		updateAsteroidsLocation();
-		//spawnAsteroid();// verwijdert achtergrond
+		spawnAsteroid();// verwijdert achtergrond
 		//TODO: remainder of the game logic -> lives if opted into the game
 
 	}
@@ -170,23 +172,30 @@ Coordinate generateRandomSpawn() {
 }
 
 void spawnAsteroid() {
-	Asteroid* roid = new Asteroid(5, 100, 0, 100, generateRandomSpawn());
+	Asteroid* roid = new Asteroid(5, 100, 50, 100, generateRandomSpawn());
 	asteroidList.push_back(roid);
 }
 
 void updateAsteroidsLocation() {
-	centerPoint->x = halfScreenWidth;
+	//centerPoint->x = halfScreenWidth;
+	centerPoint->x = 0;
 	centerPoint->y = 0;
 
 	for (Asteroid* roid : asteroidList) {
-		double a = (centerPoint->y - roid->y) / (centerPoint->x - roid->x);
+		double a;
+		if (centerPoint->x - roid->x == 0) {
+			a = 0;
+		}
+		else {
+			a = (centerPoint->y - roid->y) / (centerPoint->x - roid->x);
+		}
 		double b = -a * roid->x + roid->y;
 
-		if (roid->x < halfScreenWidth)
+		if (roid->x < centerPoint->x)
 		{
 			roid->x += gameSpeed;
 		}
-		else if (roid->x > halfScreenWidth) {
+		else if (roid->x > centerPoint->x) {
 			roid->x -= gameSpeed;
 		}
 		
@@ -199,7 +208,7 @@ void updateAsteroidsLocation() {
 }
 
 bool isOutTime() {
-	if (getElapsedSeconds() > 300.0)
+	if (getElapsedSeconds() > 30.0)
 	{
 		return true;
 	}
@@ -220,12 +229,12 @@ void openGameScreen() {
 	//TODO: CODE Switch to game screen
 	initScreen();
 
-	std::cout << "draw left vizor" << std::endl;
+	std::cout << "draw vizors" << std::endl;
 	drawVizor(leftVizor, rightVizor);
 
 	for (Asteroid* roid : asteroidList)
 	{
-		std::cout << "draw asteroid" << std::endl;
+		std::cout << "draw asteroid: (" << roid->x << "," << roid->y << "," << roid->y << ")" << std::endl;
 		drawAsteroid(roid->x, roid->y, roid->z);
 	}
 

@@ -81,6 +81,7 @@ void drawBackground() {
     glm::vec4 purple = glm::vec4(0.15f, 0.0f, 0.19f, 1);
     glm::vec4 darkgray = glm::vec4(0.1f, 0.10f, 0.1f, 1);
 
+    tigl::shader->setModelMatrix(glm::mat4(1.0f));
     //Draw background
     tigl::begin(GL_QUADS);
     tigl::addVertex(Vertex::PC(glm::vec3(200, -100, 100), darkgray));
