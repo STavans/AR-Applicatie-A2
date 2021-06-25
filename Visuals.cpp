@@ -2,9 +2,11 @@
 #include <GLFW/glfw3.h>
 #include "tigl.h"
 #include "ObjModel.h"
-#include "Game.h"
+#include <iostream>
 #include <glm/gtc/matrix_transform.hpp>
-#include "mainVisual.h"
+#include "Visuals.h"
+#include "SubModules.h"
+
 using tigl::Vertex;
 
 #pragma comment(lib, "glfw3.lib")
@@ -17,34 +19,15 @@ ObjModel* vizorModel;
 ObjModel* explosionModel;
 ObjModel* startScreenModel;
 ObjModel* endScreenModel;
-Game* game;
-
 
 int widthWindow = 1920;
 int heightWindow = 1080;
+float rotation = 0;
 
-void init();
-void update();
-void draw();
+void initVisuals();
+void updateRotation();
 void windowInit();
 void updateGameFrame();
-
-int main(void)
-{
-    windowInit();
-    game = new Game();
-    game->startUp();
-
-    while (!glfwWindowShouldClose(window))
-    {
-        updateGameFrame();
-    }
-
-    glfwTerminate();
-
-
-    return 0;
-}
 
 void windowInit() {
     if (!glfwInit())
@@ -59,43 +42,46 @@ void windowInit() {
 
     tigl::init();
 
-    init();
+    initVisuals();
 }
 
-void updateGameFrame() {
-    update();
-    glfwSwapBuffers(window);
-    glfwPollEvents();
-}
-
-void init()
-{
+void initVisuals() {
     glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
     {
         if (key == GLFW_KEY_ESCAPE)
             glfwSetWindowShouldClose(window, true);
     });
 
-
     asteroidModel = new ObjModel("models/asteroid/asteroid4.obj");
     vizorModel = new ObjModel("models/vizor/vizor.obj");
     explosionModel = new ObjModel("models/explosion/explosion2.obj");
     startScreenModel = new ObjModel("models/text/StartScreen.obj");
     endScreenModel = new ObjModel("models/text/gameover.obj");
-    
 }
 
-float rotation = 0;
+void initializeLighting() {
+    tigl::shader->enableLighting(true);
+    glShadeModel(GL_SMOOTH);
+    tigl::shader->setLightCount(1);
+    glm::vec3 lightPosDiffuse = glm::vec3(0, 0, -10);
+    tigl::shader->setLightPosition(0, lightPosDiffuse);
+    tigl::shader->setLightDiffuse(0, glm::vec4(0.8f, 0.8f, 0.8f, 0.8f));
+}
 
-void update()
-{
-    rotation += 5.0f;
+void finalizeLighting() {
+    tigl::shader->enableLighting(false);
+}
+
+void clearWindow() {
+    glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void drawBackground() {
     glm::vec4 purple = glm::vec4(0.15f, 0.0f, 0.19f, 1);
     glm::vec4 darkgray = glm::vec4(0.1f, 0.10f, 0.1f, 1);
 
+    tigl::shader->setModelMatrix(glm::mat4(1.0f));
     //Draw background
     tigl::begin(GL_QUADS);
     tigl::addVertex(Vertex::PC(glm::vec3(200, -100, 100), darkgray));
@@ -112,68 +98,10 @@ void drawBackground() {
     tigl::end();
 }
 
-void drawAsteroid(float x, float y, float z) {
-    //asteroidModel->draw(glm::vec3(10.0f, 0.0f, 10.0f));
-    asteroidModel->draw(glm::vec3(x, y, z));
-}
-
-void clearWindow() {
-    glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-}
-
-void startLighting() {
-    tigl::shader->enableLighting(true);
-    glShadeModel(GL_SMOOTH);
-    tigl::shader->setLightCount(1);
-    glm::vec3 lightPosDiffuse = glm::vec3(0, 0, -10);
-    tigl::shader->setLightPosition(0, lightPosDiffuse);
-    tigl::shader->setLightDiffuse(0, glm::vec4(0.8f, 0.8f, 0.8f, 0.8f));
-}
-
-void endLighting() {
-    tigl::shader->enableLighting(false);
-}
-
-void drawStartScreen()
-{
-    initScreen();
-
-    startScreenModel->draw(glm::vec3(0.0f, 0.0f, 5.0f));
-
-    finalizeScreen();
-}
-
-void drawEndScreen()
-{
-    initScreen();
-
-    //TODO draw score
-    endScreenModel->draw(glm::vec3(3.0f, 3.0f, 5.0f));
-
-    finalizeScreen();
-}
-
-void drawAsteroid(int x, int y, int z)
-{
-    asteroidModel->draw(glm::vec3(x, y, z));
-}
-
-void drawExplosion(int x, int y, int z)
-{
-    explosionModel->draw(glm::vec3(x, y, z));
-}
-
-void drawVizor(int x, int y)
-{
-    vizorModel->draw(glm::vec3(((x/50)), ((-1*y/50)), 1.0f), glm::vec4(0.95f, 0.35f, 0.35f, 1.0f));
-}
-
-void initScreen()
-{
+void initScreen() {
     //Clear window
     clearWindow();
-    
+
     //What does this do?
     int viewport[4];
     glGetIntegerv(GL_VIEWPORT, viewport);
@@ -188,14 +116,58 @@ void initScreen()
     drawBackground();
 
     //Draw lighting
-    startLighting();
+    initializeLighting();
 
     std::cout << "Screen initialized" << std::endl;
 }
 
-void finalizeScreen()
-{
-    endLighting();
+void finalizeScreen() {
+    finalizeLighting();
     std::cout << "Screen finalized" << std::endl;
     updateGameFrame();
+}
+
+void updateGameFrame() {
+    updateRotation();
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+}
+
+void updateRotation() {
+    rotation += 5.0f;
+}
+
+void drawAsteroid(float x, float y, float z) {
+    //asteroidModel->draw(glm::vec3(10.0f, 0.0f, 10.0f));
+    asteroidModel->draw(glm::vec3(x, y, z));
+}
+
+void drawStartScreen() {
+    initScreen();
+
+    startScreenModel->draw(glm::vec3(0.0f, 0.0f, 5.0f));
+
+    finalizeScreen();
+}
+
+void drawEndScreen(int score) {
+    initScreen();
+
+    //TODO draw score
+    endScreenModel->draw(glm::vec3(3.0f, 3.0f, 5.0f));
+
+    finalizeScreen();
+}
+
+void drawAsteroid(int x, int y, int z) {
+    asteroidModel->draw(glm::vec3(x, y, z));
+}
+
+void drawExplosion(int x, int y, int z) {
+    explosionModel->draw(glm::vec3(x, y, z));
+}
+
+void drawVizor(Vizor leftVizor, Vizor rightVizor) {
+    vizorModel->draw(glm::vec3(((leftVizor.x / 50)), ((-1 * leftVizor.y / 50)), 1.0f), glm::vec4(0.95f, 0.35f, 0.35f, 1.0f));
+    vizorModel->draw(glm::vec3(((rightVizor.x / 50)), ((-1 * rightVizor.y / 50)), 1.0f), glm::vec4(0.95f, 0.35f, 0.35f, 1.0f));
 }

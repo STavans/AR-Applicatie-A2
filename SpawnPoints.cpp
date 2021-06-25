@@ -1,37 +1,33 @@
 #include <iostream>
 #include "Coordinate.h"
+#include <vector>
+
 using namespace std;
 
 /*
 * Makes an array of 30 coordinates which are used to randomize spawn
 */
-inline Coordinate * RandomSpawnPoints(int x, int y)
+inline vector<Coordinate>  RandomSpawnPoints(int x, int y)
 {
-    Coordinate cArray[30];
+    vector<Coordinate> vecCoor{};
 
     // adds 10 spawnpoints on the left of the screen
     for (int i = 0; i < 10; i++)
     {
         Coordinate c;
-        c.x = 0;
-        c.y = rand() % y;
+        c.x = x - (x / 6 + (rand() % x / 2));
+        c.y = y - (rand() % y / 2);
 
-        cArray[i] = c;
+         vecCoor.push_back(c);
     }
 
     // adds 10 spawnpoints on the upper part of the screen
     for (int i = 0; i < 10; i++) {
         Coordinate c;
-        int checkX = rand() % x;
-        if (checkX < x / 2 - 50 && checkX > x / 2 + 50) {
-            c.x = checkX;
-        }
-        else {
-            c.x = 200;
-        }
+        c.x = x - (rand() % x);
         c.y = y;
 
-        cArray[i + 10] = c;
+        vecCoor.push_back(c);
     }
 
     // adds 10 spawnpoints on the right side of the screen
@@ -39,11 +35,11 @@ inline Coordinate * RandomSpawnPoints(int x, int y)
     {
         Coordinate c;
         c.x = x;
-        c.y = rand() % y;
+        c.y = y - (rand() % y);
 
-        cArray[i + 20] = c;
+        vecCoor.push_back(c);
     }
 
     // returns array of spawnpoints
-    return cArray;
+    return vecCoor;
 }

@@ -10,34 +10,28 @@
 #include <vector>
 #include <algorithm>
 
-class Game {
+const int StartScreen = 1;
+const int GameScreen = 2;
+const int EndScreen = 3;
 
-public:
-	Vizor leftVizor, rightVizor;
+void stateMachine();
+void spawnAsteroid();
+void openGameScreen();
+void explodeAsteroid(Asteroid* roid);
+void checkAsteroids();
+bool isOutTime();
+void checkSpawnable();
+void endGame();
+Coordinate generateRandomSpawn();
+void mainLoop();
+bool enterButtonPressed();
+void startGame();
+void gamePlay();
+bool readyToReset();
+void gameCheck();
+void ResetAll();
+void updateAsteroidsLocation();
 
-	int score;
-	int state;
-
-	std::vector<Asteroid*> asteroidList;
-
-	void startUp();
-	void spawnAsteroid();
-	void openGameScreen();
-	void explodeAsteroid(Asteroid* roid);
-	void updateLeftVizor(Coordinate left);
-	void updateRightVizor(Coordinate right);
-	void checkAsteroids();
-	bool isOutTime();
-	void checkSpawnable();
-	void endGame();
-	Coordinate generateRandomSpawn();
-	void mainLoop();
-	void stateLoopSwitch();
-	bool enterButtonPressed();
-	void startGame();
-	void gamePlay();
-	bool readyToReset();
-	void gameCheck();
-	void ResetAll();
-	void updateAsteroidsLocation();
-};
+void runStartScreenState();
+void runGameScreenState();
+void runEndScreenState();

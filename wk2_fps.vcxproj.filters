@@ -18,9 +18,6 @@
     <ClCompile Include="tigl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FpsCam.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="HitSphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -42,21 +39,21 @@
     <ClCompile Include="Timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ObjModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mainVisual.cpp">
+    <ClCompile Include="Visuals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tigl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FpsCam.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HitSphere.h">
@@ -65,25 +62,10 @@
     <ClInclude Include="Coordinate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Global.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vision.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Asteroid.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Vizor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="stb_image.h">
@@ -92,7 +74,25 @@
     <ClInclude Include="ObjModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mainVisual.h">
+    <ClInclude Include="Visuals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Asteroid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SubModules.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
