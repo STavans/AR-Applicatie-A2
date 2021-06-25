@@ -6,7 +6,7 @@
 #include "SpawnPoints.cpp"
 #include "Timer.h"
 #include "Global.h"
-#include "Vision.h"
+//#include "Vision.h"
 #include "Game.h"
 #include "mainVisual.h"
 #include <cmath>
@@ -19,7 +19,7 @@ Vizor leftVizor, rightVizor;
 int score;
 int state;
 
-std::vector<Asteroid*> asteroidList;
+std::vector<Asteroid*> asteroidList{};
 Coordinate* SpawnPoints;
 
 const int StartScreen = 1;
@@ -45,17 +45,17 @@ void Game::mainLoop(){
 }
 
 void Game::gamePlay() {
-	CVView();
-	Coordinate left = getLeftVizor();
-	Coordinate right = getRightVizor();
-	
-	leftVizor.x = left.x;
-	leftVizor.y = left.y;
-
-	rightVizor.x = right.x;
-	rightVizor.y = right.y;
-	std::cout << "right coord x = " << right.x <<endl;
-	std::cout << "rightvisor x" << rightVizor.x<<endl;
+	//CVView();
+	//Coordinate left = getLeftVizor();
+	//Coordinate right = getRightVizor();
+	//
+	//leftVizor.x = left.x;
+	//leftVizor.y = left.y;
+	//
+	//rightVizor.x = right.x;
+	//rightVizor.y = right.y;
+	//std::cout << "right coord x = " << right.x <<endl;
+	//std::cout << "rightvisor x" << rightVizor.x<<endl;
 }
 
 void Game::stateLoopSwitch() {
@@ -68,10 +68,12 @@ void Game::stateLoopSwitch() {
 			}
 			break;
 		case GameScreen:
+			//FIX: MOVE openGameScreen before gameCheck
+			openGameScreen();
 			gamePlay();
 			gameCheck(); 
 			increaseSpawn(true);
-			openGameScreen();
+			
 			break;
 		case EndScreen:
 			if (readyToReset())
@@ -220,7 +222,7 @@ void Game::openGameScreen() {
 	//TODO: CODE Switch to game screen
 	initScreen();
 
-std::cout << "draw left vizor" << std::endl;
+	std::cout << "draw left vizor" << std::endl;
 	drawVizor(leftVizor.x, leftVizor.y);
 	std::cout << "draw right vizor" << std::endl;
 	drawVizor(rightVizor.x, rightVizor.y);
