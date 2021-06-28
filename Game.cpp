@@ -21,6 +21,7 @@ Vizor leftVizor{ 50, 0, 0 }, rightVizor{ 50, 0, 0 };
 
 int score;
 int state = 1;
+int spawnCounter = 0;
 
 std::vector<Asteroid*> asteroidList{};
 vector<Coordinate> SpawnPoints;
@@ -195,8 +196,12 @@ Coordinate generateRandomSpawn() {
 }
 
 void spawnAsteroid() {
-	Asteroid* roid = new Asteroid(50, 100, 50, 100, generateRandomSpawn());
-	asteroidList.push_back(roid);
+	if (fmod(spawnCounter, 2) == 0)
+	{
+		Asteroid* roid = new Asteroid(50, 100, 50, 100, generateRandomSpawn());
+		asteroidList.push_back(roid);
+	}
+	spawnCounter++;
 }
 
 void updateAsteroidsLocation() {
