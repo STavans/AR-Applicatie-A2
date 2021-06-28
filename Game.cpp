@@ -6,7 +6,7 @@
 #include "SpawnPoints.cpp"
 #include "Timer.h"
 #include "Global.h"
-#include "Vision.h"
+//#include "Vision.h"
 #include "Game.h"
 #include "Visuals.h"
 #include <cmath>
@@ -118,7 +118,9 @@ void stateMachine() {
 }
 
 bool enterButtonPressed() {
-	if (GetAsyncKeyState(VK_RETURN))
+	short keyStateEscape = GetAsyncKeyState(VK_ESCAPE);	//This one doesn't have any explicit function here, but improves functionality in gameCheck
+	short keyStateEnter = GetAsyncKeyState(VK_RETURN);
+	if (keyStateEnter < 0)
 	{
 		return true;
 	}
@@ -126,7 +128,8 @@ bool enterButtonPressed() {
 }
 
 bool readyToReset() {
-	if (GetAsyncKeyState(VK_BACK))
+	short keyStateBack = GetAsyncKeyState(VK_BACK);
+	if (keyStateBack < 0)
 	{
 		state = StartScreen;
 		return true;
