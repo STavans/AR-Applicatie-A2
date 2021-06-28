@@ -39,7 +39,7 @@ void initializeGame() {
 
 	// make an array of spawnpoints: int are screen parameters, need to change to stand values
 	//SpawnPoints = RandomSpawnPoints(screenWidth, screenHeight);
-	SpawnPoints = RandomSpawnPoints(100, 100);
+	SpawnPoints = RandomSpawnPoints(200, 150);
 }
 
 void gamePlay() {
