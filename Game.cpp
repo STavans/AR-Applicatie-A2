@@ -185,7 +185,7 @@ void checkAsteroids() {
 void checkSpawnable() {
 	double t = (10 - getDifficulty()) / 2;
 
-	if (fmod(getElapsedSeconds(), 5) == 0) {
+	if (fmod(getElapsedSeconds(), t) == 0) {
 		spawnAsteroid();
 	}
 }
