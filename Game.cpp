@@ -39,7 +39,7 @@ void initializeGame() {
 
 	// make an array of spawnpoints: int are screen parameters, need to change to stand values
 	//SpawnPoints = RandomSpawnPoints(screenWidth, screenHeight);
-	SpawnPoints = RandomSpawnPoints(200, 150);
+	SpawnPoints = RandomSpawnPoints(350, 150);
 }
 
 void gamePlay() {
@@ -124,11 +124,9 @@ bool readyToReset() {
 void ResetAll() {
 	//            if settings used do NOT reset Settings!!!
 
-	for (Asteroid* roid : asteroidList)        //Loops through the asteroids to delete them all.
-	{
-		asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
-	}
-	
+	asteroidList.clear();
+	explosions.clear();
+
 	score = 0;
 }
 
@@ -162,14 +160,21 @@ void checkExplosions() {
 void checkAsteroids() {
 	for(Asteroid* roid : asteroidList)
 	{
-		if ((vizorAsteroidOverlapCheck(leftVizor, roid)||vizorAsteroidOverlapCheck(rightVizor, roid))&&roid->z > minDepth) {
+		/*
+		if ((vizorAsteroidOverlapCheck(leftVizor, roid)||vizorAsteroidOverlapCheck(rightVizor, roid))) {
 			score += roid->reward;
+			cout << "vizor placement: " << rightVizor.x << "" << rightVizor.y << endl;
 			cout << "Score added to: " << score << endl;
 			explodeAsteroid(roid);
 			asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
-		}else if(roid->z <= minDepth)
+		}else */
+			if(roid->z <= minDepth)
 		{
-			score -= roid->reward;
+				if (score>0)
+				{
+					score -= roid->reward;
+				}
+			
 			cout << "Score reduced to: " << score << endl;
 			explodeAsteroid(roid);
 			asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
@@ -180,7 +185,7 @@ void checkAsteroids() {
 void checkSpawnable() {
 	double t = (10 - getDifficulty()) / 2;
 
-	if (fmod(getElapsedSeconds(), t) == 0) {
+	if (fmod(getElapsedSeconds(), 5) == 0) {
 		spawnAsteroid();
 	}
 }

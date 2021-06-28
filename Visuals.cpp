@@ -63,7 +63,7 @@ void initializeLighting() {
     tigl::shader->enableLighting(true);
     glShadeModel(GL_SMOOTH);
     tigl::shader->setLightCount(1);
-    glm::vec3 lightPosDiffuse = glm::vec3(0, 0, -10);
+    glm::vec3 lightPosDiffuse = glm::vec3(0, 0, -25);
     tigl::shader->setLightPosition(0, lightPosDiffuse);
     tigl::shader->setLightDiffuse(0, glm::vec4(0.8f, 0.8f, 0.8f, 0.8f));
 }
@@ -154,7 +154,7 @@ void drawEndScreen(int score) {
     initScreen();
 
     //TODO draw score
-    endScreenModel->draw(glm::vec3(3.0f, 3.0f, 5.0f));
+    endScreenModel->draw(glm::vec3(3.0f, 0.0f, 15.0f));
 
     finalizeScreen();
 }
