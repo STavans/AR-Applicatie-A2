@@ -15,17 +15,20 @@
 #include "SubModules.h"
 #include "Explosion.h"
 #include "GameLogic.h"
+#include <thread>
 
 //-----------------------Vars-------------------
 Vizor leftVizor{ 50, 0, 0 }, rightVizor{ 50, 0, 0 };
 
 int score;
 int state = 1;
+int spawnCounter = 0;
+
 
 std::vector<Asteroid*> asteroidList{};
 vector<Coordinate> SpawnPoints;
 vector<Explosion*> explosions{};
-
+void visionLoop();
 Coordinate* centerPoint = new Coordinate();
 int rotationSpeed = 15;
 double debtSpeed = (maxDepth - minDepth) / 10.0;
@@ -43,17 +46,17 @@ void initializeGame() {
 }
 
 void gamePlay() {
-	updateVision();
+	
 	Coordinate left = getLeftVizorCoord();
 	Coordinate right = getRightVizorCoord();
 	
 	leftVizor.x = (left.x/50.0);
-	leftVizor.y = (-1*left.y/50.0);
+	leftVizor.y = ((-1*left.y)/50.0);
 
 	rightVizor.x = (right.x/50.0);
-	rightVizor.y = (-1*right.y/50.0);
-	std::cout << "right coord x = " << right.x <<endl;
-	std::cout << "rightvisor x" << rightVizor.x<<endl;
+	rightVizor.y = ((-1*right.y)/50.0);
+	//std::cout << "right coord x = " << right.x <<endl;
+	//std::cout << "rightvisor x" << rightVizor.x<<endl;
 }
 
 void startGame() {
@@ -62,6 +65,13 @@ void startGame() {
 	//TODE: CODE Generate asteroid list with spawnpoint / delete/done?
 
 	timerStart();
+
+}
+
+void visionLoop() {
+	while (state == GameScreen) {
+		updateVision();
+	}
 }
 
 void runStartScreenState() {
@@ -72,11 +82,14 @@ void runStartScreenState() {
 }
 
 void runGameScreenState() {
-	openGameScreen();
-	gamePlay();
-	gameCheck();
-	increaseSpawn(true);
-
+	thread visionThread(visionLoop);
+	while (state == GameScreen) {
+		openGameScreen();
+		gamePlay();
+		gameCheck();
+		increaseSpawn(true);
+	}
+	visionThread.join();
 }
 
 void runEndScreenState() {
@@ -134,7 +147,7 @@ void gameCheck() {
 	if (!isOutTime() && !GetAsyncKeyState(VK_ESCAPE)) {		//Checks if either the time is up or if escape key is pressed
 		checkSpawnable();
 		checkAsteroids();
-		//updateAsteroidsLocation();
+		updateAsteroidsLocation();
 		spawnAsteroid();// verwijdert achtergrond
 		checkExplosions();
 		//TODO: remainder of the game logic -> lives if opted into the game
@@ -175,7 +188,7 @@ void checkAsteroids() {
 					score -= roid->reward;
 				}
 			
-			cout << "Score reduced to: " << score << endl;
+			//cout << "Score reduced to: " << score << endl;
 			explodeAsteroid(roid);
 			asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
 		}
@@ -185,7 +198,7 @@ void checkAsteroids() {
 void checkSpawnable() {
 	double t = (10 - getDifficulty()) / 2;
 
-	if (fmod(getElapsedSeconds(), 5) == 0) {
+	if (fmod(getElapsedSeconds(), t) == 0) {
 		spawnAsteroid();
 	}
 }
@@ -195,8 +208,12 @@ Coordinate generateRandomSpawn() {
 }
 
 void spawnAsteroid() {
-	Asteroid* roid = new Asteroid(50, 100, 50, 100, generateRandomSpawn());
-	asteroidList.push_back(roid);
+	if (fmod(spawnCounter, 2) == 0)
+	{
+		Asteroid* roid = new Asteroid(50, 100, 50, 100, generateRandomSpawn());
+		asteroidList.push_back(roid);
+	}
+	spawnCounter++;
 }
 
 void updateAsteroidsLocation() {
@@ -242,6 +259,7 @@ void endGame() {
 	state = EndScreen;
 	timerStop();
 	increaseSpawn(false);
+	//STOP Thread
 	drawEndScreen(score);
 }
 
@@ -252,18 +270,18 @@ void openGameScreen() {
 	//TODO: CODE Switch to game screen
 	initScreen();
 
-	std::cout << "draw vizors" << std::endl;
+	//std::cout << "draw vizors" << std::endl;
 	drawVizor(leftVizor, rightVizor);
 
 	for (Asteroid* roid : asteroidList)
 	{
-		std::cout << "draw asteroid: (" << roid->x << "," << roid->y << "," << roid->y << ")" << std::endl;
+		//std::cout << "draw asteroid: (" << roid->x << "," << roid->y << "," << roid->y << ")" << std::endl;
 		drawAsteroid(roid->x, roid->y, roid->z);
 	}
 
 	for (Explosion* splo : explosions)
 	{
-		std::cout << "draw explosion: (" << splo->x << "," << splo->y << "," << splo->y << ")" << std::endl;
+		//std::cout << "draw explosion: (" << splo->x << "," << splo->y << "," << splo->y << ")" << std::endl;
 		drawExplosion(splo->x, splo->y, splo->z);
 	}
 	finalizeScreen();

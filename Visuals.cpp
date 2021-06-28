@@ -19,7 +19,8 @@ ObjModel* asteroidModel;
 ObjModel* vizorModel;
 ObjModel* explosionModel;
 ObjModel* startScreenModel;
-ObjModel* endScreenModel;
+ObjModel* gameOver;
+ObjModel* returnCommand;
 
 int widthWindow = 1920;
 int heightWindow = 1080;
@@ -57,7 +58,8 @@ void initVisuals() {
     vizorModel = new ObjModel("models/vizor/vizor.obj");
     explosionModel = new ObjModel("models/explosion/explosion2.obj");
     startScreenModel = new ObjModel("models/text/StartScreen.obj");
-    endScreenModel = new ObjModel("models/text/gameover.obj");
+    gameOver = new ObjModel("models/text/gameover.obj");
+    returnCommand = new ObjModel("models/text/returncommand.obj");
 }
 
 void initializeLighting() {
@@ -160,7 +162,8 @@ void drawEndScreen(int score) {
     
     glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, scoreText);
     //TODO draw score
-    endScreenModel->draw(glm::vec3(3.0f, 0.0f, 15.0f));
+    gameOver->draw(glm::vec3(0.0f, 6.0f, 6.0f));
+    returnCommand->draw(glm::vec3(3.0f, -10.0f, 15.0f));
 
     finalizeScreen();
 }
