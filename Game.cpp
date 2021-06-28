@@ -6,7 +6,7 @@
 #include "SpawnPoints.cpp"
 #include "Timer.h"
 #include "Global.h"
-#include "Vision.h"
+//#include "Vision.h"
 #include "Game.h"
 #include "Visuals.h"
 #include <cmath>
@@ -43,17 +43,17 @@ void initializeGame() {
 }
 
 void gamePlay() {
-	updateVision();
-	Coordinate left = getLeftVizorCoord();
-	Coordinate right = getRightVizorCoord();
-	
-	leftVizor.x = (left.x/50.0);
-	leftVizor.y = (-1*left.y/50.0);
-
-	rightVizor.x = (right.x/50.0);
-	rightVizor.y = (-1*right.y/50.0);
-	std::cout << "right coord x = " << right.x <<endl;
-	std::cout << "rightvisor x" << rightVizor.x<<endl;
+	//updateVision();
+	//Coordinate left = getLeftVizorCoord();
+	//Coordinate right = getRightVizorCoord();
+	//
+	//leftVizor.x = (left.x/50.0);
+	//leftVizor.y = (-1*left.y/50.0);
+	//
+	//rightVizor.x = (right.x/50.0);
+	//rightVizor.y = (-1*right.y/50.0);
+	//std::cout << "right coord x = " << right.x <<endl;
+	//std::cout << "rightvisor x" << rightVizor.x<<endl;
 }
 
 void startGame() {
@@ -105,7 +105,9 @@ void stateMachine() {
 }
 
 bool enterButtonPressed() {
-	if (GetAsyncKeyState(VK_RETURN))
+	short keyStateEscape = GetAsyncKeyState(VK_ESCAPE);	//This one doesn't have any explicit function here, but improves functionality in gameCheck
+	short keyStateEnter = GetAsyncKeyState(VK_RETURN);
+	if (keyStateEnter < 0)
 	{
 		return true;
 	}
@@ -113,7 +115,8 @@ bool enterButtonPressed() {
 }
 
 bool readyToReset() {
-	if (GetAsyncKeyState(VK_BACK))
+	short keyStateBack = GetAsyncKeyState(VK_BACK);
+	if (keyStateBack < 0)
 	{
 		state = StartScreen;
 		return true;
