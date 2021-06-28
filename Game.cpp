@@ -13,6 +13,7 @@
 #include <vector>
 #include <algorithm>
 #include "SubModules.h"
+#include "Explosion.h"
 #include "GameLogic.h"
 
 //-----------------------Vars-------------------
@@ -23,12 +24,14 @@ int state = 1;
 
 std::vector<Asteroid*> asteroidList{};
 vector<Coordinate> SpawnPoints;
+vector<Explosion*> explosions{};
 
 Coordinate* centerPoint = new Coordinate();
 int rotationSpeed = 15;
 double debtSpeed = (maxDepth - minDepth) / 10.0;
 
 //--------------
+void checkExplosions();
 
 void initializeGame() {
 	state = StartScreen;
@@ -44,11 +47,11 @@ void gamePlay() {
 	Coordinate left = getLeftVizorCoord();
 	Coordinate right = getRightVizorCoord();
 	
-	leftVizor.x = left.x;
-	leftVizor.y = left.y;
+	leftVizor.x = (left.x/50.0);
+	leftVizor.y = (-1*left.y/50.0);
 
-	rightVizor.x = right.x;
-	rightVizor.y = right.y;
+	rightVizor.x = (right.x/50.0);
+	rightVizor.y = (-1*right.y/50.0);
 	std::cout << "right coord x = " << right.x <<endl;
 	std::cout << "rightvisor x" << rightVizor.x<<endl;
 }
@@ -133,8 +136,9 @@ void gameCheck() {
 	if (!isOutTime() && !GetAsyncKeyState(VK_ESCAPE)) {		//Checks if either the time is up or if escape key is pressed
 		checkSpawnable();
 		checkAsteroids();
-		updateAsteroidsLocation();
+		//updateAsteroidsLocation();
 		spawnAsteroid();// verwijdert achtergrond
+		checkExplosions();
 		//TODO: remainder of the game logic -> lives if opted into the game
 
 	}
@@ -143,16 +147,30 @@ void gameCheck() {
 	}
 }
 
+void checkExplosions() {
+	for(Explosion* splo : explosions)
+	{
+		if (splo->Duration != 0) {
+			splo->Duration--;
+		}
+		else {
+			explosions.erase(std::remove(explosions.begin(), explosions.end(), splo), explosions.end());
+		}
+	}
+}
+
 void checkAsteroids() {
 	for(Asteroid* roid : asteroidList)
 	{
 		if ((vizorAsteroidOverlapCheck(leftVizor, roid)||vizorAsteroidOverlapCheck(rightVizor, roid))&&roid->z > minDepth) {
 			score += roid->reward;
+			cout << "Score added to: " << score << endl;
 			explodeAsteroid(roid);
 			asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
 		}else if(roid->z <= minDepth)
 		{
 			score -= roid->reward;
+			cout << "Score reduced to: " << score << endl;
 			explodeAsteroid(roid);
 			asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
 		}
@@ -172,7 +190,7 @@ Coordinate generateRandomSpawn() {
 }
 
 void spawnAsteroid() {
-	Asteroid* roid = new Asteroid(5, 100, 50, 100, generateRandomSpawn());
+	Asteroid* roid = new Asteroid(50, 100, 50, 100, generateRandomSpawn());
 	asteroidList.push_back(roid);
 }
 
@@ -238,10 +256,17 @@ void openGameScreen() {
 		drawAsteroid(roid->x, roid->y, roid->z);
 	}
 
+	for (Explosion* splo : explosions)
+	{
+		std::cout << "draw explosion: (" << splo->x << "," << splo->y << "," << splo->y << ")" << std::endl;
+		drawExplosion(splo->x, splo->y, splo->z);
+	}
 	finalizeScreen();
 }
 
 void explodeAsteroid(Asteroid* roid) {
 //TODO: OPENGL CODE EXPLOSION!!!
+	Explosion* explosion = new Explosion(roid->x, roid->y, roid->z, 3);
+	explosions.push_back(explosion);
 	drawExplosion(roid->x, roid->y, roid->z);
 }

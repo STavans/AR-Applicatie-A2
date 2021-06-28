@@ -168,6 +168,6 @@ void drawExplosion(int x, int y, int z) {
 }
 
 void drawVizor(Vizor leftVizor, Vizor rightVizor) {
-    vizorModel->draw(glm::vec3(((leftVizor.x / 50)), ((-1 * leftVizor.y / 50)), 1.0f), glm::vec4(0.95f, 0.35f, 0.35f, 1.0f));
-    vizorModel->draw(glm::vec3(((rightVizor.x / 50)), ((-1 * rightVizor.y / 50)), 1.0f), glm::vec4(0.95f, 0.35f, 0.35f, 1.0f));
+    vizorModel->draw(glm::vec3(leftVizor.x, leftVizor.y, 1.0f), glm::vec4(0.95f, 0.35f, 0.35f, 1.0f));
+    vizorModel->draw(glm::vec3(rightVizor.x, rightVizor.y, 1.0f), glm::vec4(0.95f, 0.35f, 0.35f, 1.0f));
 }
