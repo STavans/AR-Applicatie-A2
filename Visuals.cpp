@@ -6,7 +6,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "Visuals.h"
 #include "SubModules.h"
-#include <GL/freeglut.h>
 
 using tigl::Vertex;
 
@@ -156,11 +155,6 @@ void drawStartScreen() {
 void drawEndScreen(int score) {
     initScreen();
 
-    const unsigned char* scoreText = (const unsigned char*) score;
-
-    glRasterPos2i(200, 200);
-    
-    glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, scoreText);
     //TODO draw score
     gameOver->draw(glm::vec3(0.0f, 6.0f, 6.0f));
     returnCommand->draw(glm::vec3(3.0f, -10.0f, 15.0f));
