@@ -20,6 +20,20 @@ ObjModel* explosionModel;
 ObjModel* startScreenModel;
 ObjModel* gameOver;
 ObjModel* returnCommand;
+ObjModel* scoreBase;
+
+ObjModel* one;
+ObjModel* two;
+ObjModel* three;
+ObjModel* four;
+ObjModel* five;
+ObjModel* six;
+ObjModel* seven;
+ObjModel* eight;
+ObjModel* nine;
+ObjModel* zero;
+
+
 
 int widthWindow = 1920;
 int heightWindow = 1080;
@@ -29,6 +43,8 @@ void initVisuals();
 void updateRotation();
 void windowInit();
 void updateGameFrame();
+void print_each_digit(int x, int layer);
+void scoreswitchcase(int digit, int layer);
 
 void windowInit() {
     if (!glfwInit())
@@ -59,6 +75,19 @@ void initVisuals() {
     startScreenModel = new ObjModel("models/text/StartScreen.obj");
     gameOver = new ObjModel("models/text/gameover.obj");
     returnCommand = new ObjModel("models/text/returncommand.obj");
+    scoreBase = new ObjModel("models/text/score.obj");
+
+    one = new ObjModel("models/text/one.obj");
+    two = new ObjModel("models/text/two.obj");
+    three = new ObjModel("models/text/three.obj");
+    four = new ObjModel("models/text/four.obj");
+    five = new ObjModel("models/text/five.obj");
+    six = new ObjModel("models/text/six.obj");
+    seven = new ObjModel("models/text/seven.obj");
+    eight = new ObjModel("models/text/eight.obj");
+    nine = new ObjModel("models/text/nine.obj");
+    zero = new ObjModel("models/text/zero.obj");
+
 }
 
 void initializeLighting() {
@@ -157,10 +186,74 @@ void drawEndScreen(int score) {
 
     //TODO draw score
     gameOver->draw(glm::vec3(0.0f, 6.0f, 6.0f));
+    scoreBase->draw(glm::vec3(4.0f, 0.0f, 0.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+    if (score == 0) {
+        scoreswitchcase(0, 1);
+        scoreswitchcase(0, 2);
+        scoreswitchcase(0, 3);
+        scoreswitchcase(0, 4);
+    }
+    else {
+        print_each_digit(score, 0);
+    }
     returnCommand->draw(glm::vec3(3.0f, -10.0f, 15.0f));
 
     finalizeScreen();
 }
+
+void print_each_digit(int x, int layer)
+{
+    layer++;
+    if (x >= 10) {
+        
+        print_each_digit(x / 10, layer);
+    }
+    int digit = x % 10;
+    std::cout << "digit: " << digit << " Layer: " << layer <<std::endl;
+    scoreswitchcase(digit, layer);
+}
+
+void scoreswitchcase(int digit, int layer) {
+    glm::vec3 position = glm::vec3((-5 + layer), 0.0f, 0.0f);
+    glm::vec4 color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+    switch (digit)
+    {
+    case 0:
+        zero->draw(position, color);
+        break;
+    case 1:
+        one->draw(position, color);
+        break;
+    case 2:
+        two->draw(position, color);
+        break;
+    case 3:
+        three->draw(position, color);
+        break;
+    case 4:
+        four->draw(position, color);
+        break;
+    case 5:
+        five->draw(position, color);
+        break;
+    case 6:
+        six->draw(position, color);
+        break;
+    case 7:
+        seven->draw(position, color);
+        break;
+    case 8:
+        eight->draw(position, color);
+        break;
+    case 9:
+        nine->draw(position, color);
+        break;
+    default:
+        break;
+    }
+
+}
+
 
 void drawAsteroid(int x, int y, int z) {
     asteroidModel->draw(glm::vec3(x, y, z));

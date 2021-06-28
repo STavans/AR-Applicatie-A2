@@ -176,14 +176,14 @@ void checkExplosions() {
 void checkAsteroids() {
 	for(Asteroid* roid : asteroidList)
 	{
-		/*
+		
 		if ((vizorAsteroidOverlapCheck(leftVizor, roid)||vizorAsteroidOverlapCheck(rightVizor, roid))) {
 			score += roid->reward;
 			cout << "vizor placement: " << rightVizor.x << "" << rightVizor.y << endl;
 			cout << "Score added to: " << score << endl;
 			explodeAsteroid(roid);
 			asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
-		}else */
+		}else 
 			if(roid->z <= minDepth)
 		{
 				if (score>0)
