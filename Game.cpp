@@ -18,7 +18,7 @@
 #include <thread>
 
 //-----------------------Vars-------------------
-Vizor leftVizor{ 50, 0, 0 }, rightVizor{ 50, 0, 0 };
+Vizor leftVizor{ 0, 0, 0 }, rightVizor{ 0, 0, 0 };
 
 int score;
 int state = 1;
@@ -213,7 +213,7 @@ Coordinate generateRandomSpawn() {
 void spawnAsteroid() {
 	if (fmod(spawnCounter, 2) == 0)
 	{
-		Asteroid* roid = new Asteroid(50, 100, 50, 100, generateRandomSpawn());
+		Asteroid* roid = new Asteroid(10, 100, 50, 100, generateRandomSpawn());
 		asteroidList.push_back(roid);
 	}
 	spawnCounter++;
@@ -251,7 +251,7 @@ void updateAsteroidsLocation() {
 }
 
 bool isOutTime() {
-	if (getElapsedSeconds() > 30.0)
+	if (getElapsedSeconds() > 300.0)
 	{
 		return true;
 	}
