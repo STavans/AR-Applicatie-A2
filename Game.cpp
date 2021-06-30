@@ -211,7 +211,7 @@ Coordinate generateRandomSpawn() {
 }
 
 void spawnAsteroid() {
-	if (fmod(spawnCounter, 2) == 0)
+	if (fmod(spawnCounter, 4) == 0)
 	{
 		Asteroid* roid = new Asteroid(50, 100, 50, 100, generateRandomSpawn());
 		asteroidList.push_back(roid);
