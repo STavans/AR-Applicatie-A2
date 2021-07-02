@@ -51,10 +51,10 @@ void gamePlay() {
 	Coordinate right = getRightVizorCoord();
 	
 	leftVizor.x = (left.x/50.0);
-	leftVizor.y = ((-1*left.y)/50.0);
+	leftVizor.y = ((-1.0*left.y)/50.0);
 
 	rightVizor.x = (right.x/50.0);
-	rightVizor.y = ((-1*right.y)/50.0);
+	rightVizor.y = ((-1.0*right.y)/50.0);
 }
 
 void startGame() {
