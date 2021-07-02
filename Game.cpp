@@ -59,21 +59,29 @@ void gamePlay() {
 	//std::cout << "rightvisor x" << rightVizor.x<<endl;
 }
 
+/*
+* Starts the timer and starts the gameScreen
+*/
 void startGame() {
 	state = GameScreen;
 	openGameScreen();
-	//TODE: CODE Generate asteroid list with spawnpoint / delete/done?
 
 	timerStart();
 
 }
 
+/*
+* Updates the vision camera
+*/
 void visionLoop() {
 	while (state == GameScreen) {
 		updateVision();
 	}
 }
 
+/*
+* Starts the game when EnterButtonPressed
+*/
 void runStartScreenState() {
 	if (enterButtonPressed())
 	{
@@ -81,6 +89,9 @@ void runStartScreenState() {
 	}
 }
 
+/*
+* Starts playing the game, so starts Vision, opens the screen, and plays and checks the game.
+*/
 void runGameScreenState() {
 	thread visionThread(visionLoop);
 	while (state == GameScreen) {
@@ -92,6 +103,9 @@ void runGameScreenState() {
 	visionThread.join();
 }
 
+/*
+* Resets everything and returns to startScreen.
+*/
 void runEndScreenState() {
 	if (readyToReset())
 	{
@@ -100,6 +114,9 @@ void runEndScreenState() {
 	}
 }
 
+/*
+* switch case for keeping the current game state.
+*/
 void stateMachine() {
 	switch (state)
 	{
@@ -117,6 +134,9 @@ void stateMachine() {
 	}
 }
 
+/*
+* Checkes if enterButton is pressed.
+*/
 bool enterButtonPressed() {
 	short keyStateEscape = GetAsyncKeyState(VK_ESCAPE);	//This one doesn't have any explicit function here, but improves functionality in gameCheck
 	short keyStateEnter = GetAsyncKeyState(VK_RETURN);
@@ -127,6 +147,9 @@ bool enterButtonPressed() {
 	return false;
 }
 
+/*
+* Checks if Backspace is pressed and returnes to startScreen.
+*/
 bool readyToReset() {
 	short keyStateBack = GetAsyncKeyState(VK_BACK);
 	if (keyStateBack < 0)
@@ -137,30 +160,35 @@ bool readyToReset() {
 	return false;
 }
 
+/*
+* Resets all the asteroids, explosions and score.
+*/
 void ResetAll() {
-	//            if settings used do NOT reset Settings!!!
-
 	asteroidList.clear();
 	explosions.clear();
 
 	score = 0;
 }
 
+/*
+* Calls all methods used for gameLogic, also checks if game has ended via timelimit or escape pressed.
+*/
 void gameCheck() {
-	if (!isOutTime() && !GetAsyncKeyState(VK_ESCAPE)) {		//Checks if either the time is up or if escape key is pressed
+	if (!isOutTime() && !GetAsyncKeyState(VK_ESCAPE)) {
 		checkSpawnable();
 		checkAsteroids();
 		updateAsteroidsLocation();
-		spawnAsteroid();// verwijdert achtergrond
+		spawnAsteroid();
 		checkExplosions();
-		//TODO: remainder of the game logic -> lives if opted into the game
-
 	}
 	else {
 		endGame();
 	}
 }
 
+/*
+* Checks if a Explosions is required on the screen and removes it when no longer needed.
+*/
 void checkExplosions() {
 	for(Explosion* splo : explosions)
 	{
@@ -173,6 +201,10 @@ void checkExplosions() {
 	}
 }
 
+
+/*
+* Checks if the asteroid and vizors overlap.
+*/
 void checkAsteroids() {
 	for(Asteroid* roid : asteroidList)
 	{
@@ -190,14 +222,15 @@ void checkAsteroids() {
 				{
 					score -= roid->reward;
 				}
-			
-			//cout << "Score reduced to: " << score << endl;
 			explodeAsteroid(roid);
 			asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
 		}
 	}
 }
 
+/*
+* Checks if asteroids need to be spawned based on the difficulty, not fully integrated yet.
+*/
 void checkSpawnable() {
 	double t = (10 - getDifficulty()) / 2;
 
@@ -206,10 +239,16 @@ void checkSpawnable() {
 	}
 }
 
+/*
+* Chooses a random spawnpoint out of the list.
+*/
 Coordinate generateRandomSpawn() {
 	return SpawnPoints[rand() % 30];
 }
 
+/*
+* Spawns an asteroid, every 6 iterations, with a random spawnpoint.
+*/
 void spawnAsteroid() {
 	if (fmod(spawnCounter, 6) == 0)
 	{
@@ -219,8 +258,10 @@ void spawnAsteroid() {
 	spawnCounter++;
 }
 
+/*
+* Updates the location of all asteroids on the screen.
+*/
 void updateAsteroidsLocation() {
-	//centerPoint->x = halfScreenWidth;
 	centerPoint->x = 0;
 	centerPoint->y = 0;
 
@@ -250,6 +291,9 @@ void updateAsteroidsLocation() {
 	}
 }
 
+/*
+* Checks if the game time has expired.
+*/
 bool isOutTime() {
 	if (getElapsedSeconds() > 300.0)
 	{
@@ -258,40 +302,39 @@ bool isOutTime() {
 	return false;
 }
 
+/*
+* Calls all usefull methods when the game has ended.
+*/
 void endGame() {
 	state = EndScreen;
 	timerStop();
 	increaseSpawn(false);
-	//STOP Thread
 	drawEndScreen(score);
 }
 
-//-------------OPENGL/visuals-------------
-//Move these to open GL later
-
+/*
+* Gives the instructions to draw Asteroids, vizors and explosions on the right locations.
+*/
 void openGameScreen() {
-	//TODO: CODE Switch to game screen
 	initScreen();
-
-	//std::cout << "draw vizors" << std::endl;
 	drawVizor(leftVizor, rightVizor);
 
 	for (Asteroid* roid : asteroidList)
 	{
-		//std::cout << "draw asteroid: (" << roid->x << "," << roid->y << "," << roid->y << ")" << std::endl;
 		drawAsteroid(roid->x, roid->y, roid->z);
 	}
 
 	for (Explosion* splo : explosions)
 	{
-		//std::cout << "draw explosion: (" << splo->x << "," << splo->y << "," << splo->y << ")" << std::endl;
 		drawExplosion(splo->x, splo->y, splo->z);
 	}
 	finalizeScreen();
 }
 
+/*
+* Logic for drawing and creating the explosions.
+*/
 void explodeAsteroid(Asteroid* roid) {
-//TODO: OPENGL CODE EXPLOSION!!!
 	Explosion* explosion = new Explosion(roid->x, roid->y, roid->z, 3);
 	explosions.push_back(explosion);
 	drawExplosion(roid->x, roid->y, roid->z);

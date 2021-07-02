@@ -46,6 +46,9 @@ void updateGameFrame();
 void print_each_digit(int x, int layer);
 void scoreswitchcase(int digit, int layer);
 
+/*
+* inits the window
+*/
 void windowInit() {
     if (!glfwInit())
         throw "Could not initialize glwf";
@@ -62,6 +65,9 @@ void windowInit() {
     initVisuals();
 }
 
+/*
+* inits the objectmodels
+*/
 void initVisuals() {
     glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
     {
@@ -90,6 +96,9 @@ void initVisuals() {
 
 }
 
+/*
+* inits the lighting
+*/
 void initializeLighting() {
     tigl::shader->enableLighting(true);
     glShadeModel(GL_SMOOTH);
@@ -99,15 +108,24 @@ void initializeLighting() {
     tigl::shader->setLightDiffuse(0, glm::vec4(0.8f, 0.8f, 0.8f, 0.8f));
 }
 
+/*
+* clears the lighting
+*/
 void finalizeLighting() {
     tigl::shader->enableLighting(false);
 }
 
+/*
+* clears the window
+*/
 void clearWindow() {
     glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
+/*
+* draws the background
+*/
 void drawBackground() {
     glm::vec4 purple = glm::vec4(0.15f, 0.0f, 0.19f, 1);
     glm::vec4 darkgray = glm::vec4(0.1f, 0.10f, 0.1f, 1);
@@ -129,6 +147,9 @@ void drawBackground() {
     tigl::end();
 }
 
+/*
+* inits the screen 
+*/
 void initScreen() {
     //Clear window
     clearWindow();
@@ -152,27 +173,41 @@ void initScreen() {
     std::cout << "Screen initialized" << std::endl;
 }
 
+/*
+* clears the screen
+*/
 void finalizeScreen() {
     finalizeLighting();
     std::cout << "Screen finalized" << std::endl;
     updateGameFrame();
 }
 
+/*
+*  updates the game
+*/
 void updateGameFrame() {
     updateRotation();
     glfwSwapBuffers(window);
     glfwPollEvents();
 }
 
+/*
+* updates the rotation
+*/
 void updateRotation() {
     rotation += 5.0f;
 }
 
+/*
+* draws the asteroids at the given location
+*/
 void drawAsteroid(float x, float y, float z) {
-    //asteroidModel->draw(glm::vec3(10.0f, 0.0f, 10.0f));
     asteroidModel->draw(glm::vec3(x, y, z));
 }
 
+/*
+* Draws the text of the startScreen
+*/
 void drawStartScreen() {
     initScreen();
 
@@ -181,10 +216,12 @@ void drawStartScreen() {
     finalizeScreen();
 }
 
+/*
+* Draws the text of the endScreen
+*/
 void drawEndScreen(int score) {
     initScreen();
 
-    //TODO draw score
     gameOver->draw(glm::vec3(0.0f, 6.0f, 6.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
     scoreBase->draw(glm::vec3(4.0f, 0.0f, 0.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
     if (score == 0) {
@@ -201,6 +238,9 @@ void drawEndScreen(int score) {
     finalizeScreen();
 }
 
+/*
+* Method for drawing digits
+*/
 void print_each_digit(int x, int layer)
 {
     layer++;
@@ -213,6 +253,9 @@ void print_each_digit(int x, int layer)
     scoreswitchcase(digit, layer);
 }
 
+/*
+* switch case for drawing the digits
+*/
 void scoreswitchcase(int digit, int layer) {
     glm::vec3 position = glm::vec3((-5 + layer), 0.0f, 0.0f);
     glm::vec4 color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
@@ -254,15 +297,16 @@ void scoreswitchcase(int digit, int layer) {
 
 }
 
-
-void drawAsteroid(int x, int y, int z) {
-    asteroidModel->draw(glm::vec3(x, y, z));
-}
-
+/*
+* Draws the explosion
+*/
 void drawExplosion(int x, int y, int z) {
     explosionModel->draw(glm::vec3(x, y, z));
 }
 
+/*
+* Draws the vizors
+*/
 void drawVizor(Vizor leftVizor, Vizor rightVizor) {
     vizorModel->draw(glm::vec3(leftVizor.x, leftVizor.y, 1.0f), glm::vec4(0.95f, 0.35f, 0.35f, 1.0f));
     vizorModel->draw(glm::vec3(rightVizor.x, rightVizor.y, 1.0f), glm::vec4(0.95f, 0.35f, 0.35f, 1.0f));
