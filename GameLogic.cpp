@@ -13,20 +13,10 @@ bool vizorAsteroidOverlapCheck(Vizor vizor, Asteroid* asteroid) {
     double distSq = (asteroidx - vizor.x) * (asteroidx - vizor.x) +
         (asteroidy - vizor.y) * (asteroidy - vizor.y);
     double radSumSq = (vizor.diameter + asteroidd) * (vizor.diameter + asteroidd);
-    cout << "logic check: " << distSq << ", " << radSumSq << endl;
     if (distSq <= radSumSq) {
-        cout << "Explode: " << endl;
-        cout << "asteroid: " << asteroidx << ", " << asteroidy << ", " << asteroidd << endl;
-        cout << "roid: " << roid.x << ", " << roid.y << ", " << roid.z << endl;
-        cout << "Vizor: " << vizor.x << ", " << vizor.y << ", " << vizor.diameter << endl;
         return true;
     }
     else {
-     
-        cout << "Not Explode: "  << endl;
-        cout << "asteroid: " << asteroidx << ", " << asteroidy << ", " << asteroidd << endl;
-        cout << "roid: " << roid.x << ", " << roid.y << ", " << roid.z << endl;
-        cout << "Vizor: " << vizor.x << ", " << vizor.y << ", " << vizor.diameter << endl;
         return false;
     }
 }

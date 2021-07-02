@@ -4,9 +4,10 @@
 void mainLoop();
 void initializeSubModels();
 
-void main() {
+int main() {
 	initializeSubModels();
 	mainLoop();
+	return 1;
 }
 
 void initializeSubModels() {
