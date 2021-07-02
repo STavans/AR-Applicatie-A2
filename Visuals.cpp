@@ -176,7 +176,7 @@ void drawAsteroid(float x, float y, float z) {
 void drawStartScreen() {
     initScreen();
 
-    startScreenModel->draw(glm::vec3(0.0f, 0.0f, 5.0f));
+    startScreenModel->draw(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 
     finalizeScreen();
 }
@@ -185,7 +185,7 @@ void drawEndScreen(int score) {
     initScreen();
 
     //TODO draw score
-    gameOver->draw(glm::vec3(0.0f, 6.0f, 6.0f));
+    gameOver->draw(glm::vec3(0.0f, 6.0f, 6.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
     scoreBase->draw(glm::vec3(4.0f, 0.0f, 0.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
     if (score == 0) {
         scoreswitchcase(0, 1);
@@ -196,7 +196,7 @@ void drawEndScreen(int score) {
     else {
         print_each_digit(score, 0);
     }
-    returnCommand->draw(glm::vec3(3.0f, -10.0f, 15.0f));
+    returnCommand->draw(glm::vec3(3.0f, -10.0f, 15.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 
     finalizeScreen();
 }
