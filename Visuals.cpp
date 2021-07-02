@@ -148,13 +148,10 @@ void initScreen() {
 
     //Draw lighting
     initializeLighting();
-
-    std::cout << "Screen initialized" << std::endl;
 }
 
 void finalizeScreen() {
     finalizeLighting();
-    std::cout << "Screen finalized" << std::endl;
     updateGameFrame();
 }
 
@@ -209,7 +206,6 @@ void print_each_digit(int x, int layer)
         print_each_digit(x / 10, layer);
     }
     int digit = x % 10;
-    std::cout << "digit: " << digit << " Layer: " << layer <<std::endl;
     scoreswitchcase(digit, layer);
 }
 

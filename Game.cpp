@@ -55,8 +55,6 @@ void gamePlay() {
 
 	rightVizor.x = (right.x/50.0);
 	rightVizor.y = ((-1*right.y)/50.0);
-	//std::cout << "right coord x = " << right.x <<endl;
-	//std::cout << "rightvisor x" << rightVizor.x<<endl;
 }
 
 void startGame() {
@@ -179,8 +177,6 @@ void checkAsteroids() {
 		
 		if ((vizorAsteroidOverlapCheck(leftVizor, roid)||vizorAsteroidOverlapCheck(rightVizor, roid))) {
 			score += roid->reward;
-			cout << "vizor placement: " << rightVizor.x << "" << rightVizor.y << endl;
-			cout << "Score added to: " << score << endl;
 			explodeAsteroid(roid);
 			asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
 		}else 
@@ -190,8 +186,6 @@ void checkAsteroids() {
 				{
 					score -= roid->reward;
 				}
-			
-			//cout << "Score reduced to: " << score << endl;
 			explodeAsteroid(roid);
 			asteroidList.erase(std::remove(asteroidList.begin(), asteroidList.end(), roid), asteroidList.end());
 		}
@@ -272,19 +266,15 @@ void endGame() {
 void openGameScreen() {
 	//TODO: CODE Switch to game screen
 	initScreen();
-
-	//std::cout << "draw vizors" << std::endl;
 	drawVizor(leftVizor, rightVizor);
 
 	for (Asteroid* roid : asteroidList)
 	{
-		//std::cout << "draw asteroid: (" << roid->x << "," << roid->y << "," << roid->y << ")" << std::endl;
 		drawAsteroid(roid->x, roid->y, roid->z);
 	}
 
 	for (Explosion* splo : explosions)
 	{
-		//std::cout << "draw explosion: (" << splo->x << "," << splo->y << "," << splo->y << ")" << std::endl;
 		drawExplosion(splo->x, splo->y, splo->z);
 	}
 	finalizeScreen();
