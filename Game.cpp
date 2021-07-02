@@ -31,7 +31,7 @@ vector<Explosion*> explosions{};
 void visionLoop();
 Coordinate* centerPoint = new Coordinate();
 int rotationSpeed = 15;
-double debtSpeed = (maxDepth - minDepth) / 10.0;
+double debtSpeed = (maxDepth - minDepth) / 40.0;
 
 //--------------
 void checkExplosions();
@@ -211,7 +211,7 @@ Coordinate generateRandomSpawn() {
 }
 
 void spawnAsteroid() {
-	if (fmod(spawnCounter, 4) == 0)
+	if (fmod(spawnCounter, 6) == 0)
 	{
 		Asteroid* roid = new Asteroid(10, 100, 50, 100, generateRandomSpawn());
 		asteroidList.push_back(roid);
