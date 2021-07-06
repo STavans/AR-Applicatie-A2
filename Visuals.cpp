@@ -198,7 +198,7 @@ void updateRotation() {
 /*
 * draws the asteroids at the given location
 */
-void drawAsteroid(float x, float y, float z) {
+void drawAsteroid(int x, int y, int z) {
     asteroidModel->draw(glm::vec3(x, y, z));
 }
 

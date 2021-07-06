@@ -18,9 +18,6 @@
     <ClCompile Include="tigl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HitSphere.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SpawnPoints.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -57,9 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tigl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HitSphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Coordinate.h">
